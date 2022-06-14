@@ -1,41 +1,88 @@
 
-plugins {
 
-    id 'java-library'
+//Gradleプラグインの指定
+this.plugins {
 
-    //ライブラリ全部を含んだ.jarをビルドするプラグイン。
-    id 'com.github.johnrengelman.shadow' version '5.0.0'
-}
+    //id 'NAME'
+    //id 'NAME' version 'VERSION'
 
-repositories {
+    id 'java-library' 
+    id 'com.github.johnrengelman.shadow' version '5.0.0';
+};
+
+//ライブラリの取得元となるリポジトリを指定
+this.repositories {
 
 	google()
     mavenCentral()
     jcenter()
+}
+
+//依存関係(ライブラリ)を指定
+this.dependencies {
+
+    //implementation "AAAA:BBBB:VVVV"
+    
+    //implementation fileTree(dir: 'lib', include: ["*"]);
+}
+
+//タスクを作成
+task printTest {
+
+    println('==========Task Start==========');
+    
+    def obj = this;
+    println("=====Object=====")
+    println(obj.class);
+    println(obj);
+    println("=====Method=====")
+    obj.metaClass.getMetaMethods().forEach({MetaMethod o -> println(o.getSignature())});
+    println("=====Property=====")
+    obj.metaClass.getProperties().forEach({MetaProperty o -> println(o.getType().toString() + " : " + o.getName())})
+
+    println('==========Task End==========');
+}
+
+
+
+
+
+
+
+
+//javaの設定(プラグイン)
+java {
+
+    toolchain {
+        //Javaのバージョンを指定
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 
 }
 
+//タスクのうち指定のクラスに一致するものに対して処理を行う
 tasks.withType(JavaCompile) {
 
 	options.encoding = 'UTF-8';
 }
 
+//jarの設定(プラグイン)
 jar {
+
     manifest {
+        
         attributes 'Main-Class': 'test.Main'
     }
 }
 
-dependencies {
 
-//	implementation "AAAA:BBBB:VVVV"
-//	implementation fileTree(dir: 'lib', include: ["*"])
 
-}
 
-//Javaのバージョン指定
-sourceCompatibility = 11
-targetCompatibility = 11
+
+
+
+
+
 
 
 
