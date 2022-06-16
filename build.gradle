@@ -3,10 +3,12 @@
 //Gradleプラグインの指定
 plugins {
 
+    id 'application'
     id 'java-library' 
 
     //fat-jar作成プラグイン
-    id 'com.github.johnrengelman.shadow' version '5.0.0';
+    id 'com.github.johnrengelman.shadow' version '5.0.0'
+
 };
 
 //ライブラリの取得元となるリポジトリを指定
@@ -17,39 +19,8 @@ repositories {
     jcenter()
 }
 
-//依存関係(ライブラリ)を指定
-dependencies {
 
-    //implementation "AAAA:BBBB:VVVV"
-    //implementation fileTree(dir: 'lib', include: ["*"]);
-}
-
-//タスクを作成
-task printTest {
-
-    println('==========Task Start==========');
-    
-    def obj = this.sourceSets;
-    
-    println("=====Method=====")
-    obj.metaClass.getMetaMethods().forEach({MetaMethod o -> println(o.getSignature())});
-    println("=====Property=====")
-    obj.metaClass.getProperties().forEach({MetaProperty o -> println(o.getType().toString() + " : " + o.getName())})
-    println("=====Object=====")
-    println(obj.class);
-    println(obj);
-    
-    println('==========Task End==========');
-}
-
-
-
-
-
-
-
-
-//javaの設定(プラグイン)
+//javaの設定
 java {
 
     toolchain {
@@ -62,29 +33,92 @@ java {
 //タスクのうち指定のクラスに一致するものに対して処理を行う
 tasks.withType(JavaCompile) {
 
-	options.encoding = 'UTF-8';
+	options.encoding = 'UTF-8'
 }
 
-//jarの設定(プラグイン)
-jar {
-    manifest {
-        
-        attributes 'Main-Class': 'test.Main'
-    }
-}
+
+
+
+
 
 //ソースセットの設定
 sourceSets {
 
     //新しいソースセットの作成
-    // [NewName] {
+    // [NewSourceSet] {
         
     // }
+
+}
+
+//依存関係(ライブラリ)を指定
+dependencies {
+
+    //implementation "AAAA:BBBB:VVVV"
+    //implementation fileTree(dir: 'lib', include: ["*"]);
+    //[newsourceset]Implementation ""
+}
+
+//アプリケーションの設定
+//参考 https://docs.gradle.org/current/userguide/application_plugin.html
+application {
+
+    //エントリーポイント
+    mainClass = 'test.Main'
+}
+
+//jarの設定
+jar {
+    manifest {
+        
+    }
 }
 
 
 
+//タスクを作成
+//とある値の情報を表示する
+task printTest {
 
+    //タスクの処理ではなく、設定を記述する
+
+    //最後の処理を設定
+    doLast {
+        println('==========Task Start==========');
+        
+        def obj = this.jar;
+        
+        println("=====Method=====");
+        obj.metaClass.getMetaMethods().forEach({MetaMethod o -> println(o.getSignature())});
+        println("=====Property=====");
+        obj.metaClass.getProperties().forEach({MetaProperty o -> 
+
+            print(String.format("(%s) %s", o.getType(), o.getName()));
+            if(obj instanceof Class)
+            {
+                println();
+                return;
+            }
+
+            def value = null;
+            try
+            {
+                value = o.getProperty(obj);
+                println(String.format("   =   (%s) %s", value?.class, value));
+            }
+            catch(Exception e)
+            {
+                println(" = [N/A]");
+            }
+        })
+
+        println("=====Object=====");
+        println(obj.class);
+        println(obj);
+        println('==========Task End==========');
+    }
+
+}
 
 
 
