@@ -4,12 +4,37 @@
 plugins {
 
     id 'application'
-    id 'java-library' 
+    id 'java-library'
+    id 'eclipse'
 
     //fat-jar作成プラグイン
     id 'com.github.johnrengelman.shadow' version '5.0.0'
 
 };
+
+eclipse {
+
+        classpath.downloadJavadoc = true
+        classpath.downloadSources = true
+}
+
+//アプリケーションの設定
+application {
+
+    //エントリーポイント
+    mainClassName = 'test.Main'
+}
+
+//変数定義
+ext {
+
+}
+
+//構成定義
+configurations {
+
+}
+
 
 //ライブラリの取得元となるリポジトリを指定
 repositories {
@@ -17,6 +42,17 @@ repositories {
 	google()
     mavenCentral()
     jcenter()
+    maven
+    {
+        url "https://jitpack.io"
+    }
+}
+
+//依存関係(ライブラリ)を指定
+dependencies {
+
+    //implementation "AAAA:BBBB:VVVV"
+    //implementation fileTree(dir: 'lib', include: ["*"]);
 }
 
 
@@ -30,6 +66,13 @@ java {
 
 }
 
+//jarの設定
+jar {
+    manifest {
+        
+    }
+}
+
 //タスクのうち指定のクラスに一致するものに対して処理を行う
 tasks.withType(JavaCompile) {
 
@@ -39,89 +82,98 @@ tasks.withType(JavaCompile) {
 
 
 
+//成果物を設定
+artifacts {
 
-
-//ソースセットの設定
-sourceSets {
-
-    //新しいソースセットの作成
-    // [NewSourceSet] {
-        
-    // }
-
+    //[configurations内の名前] [作成タスク]
 }
 
-//依存関係(ライブラリ)を指定
-dependencies {
 
-    //implementation "AAAA:BBBB:VVVV"
-    //implementation fileTree(dir: 'lib', include: ["*"]);
-    //[newsourceset]Implementation ""
-}
 
-//アプリケーションの設定
-//参考 https://docs.gradle.org/current/userguide/application_plugin.html
-application {
+eclipse.classpath.file {
 
-    //エントリーポイント
-    mainClass = 'test.Main'
-}
+    
+    //.classpathに変更を適用したときの動作
+	whenMerged {classpath ->
 
-//jarの設定
-jar {
-    manifest {
-        
+        //classpath.entries.removeAll {entry -> entry.kind == 'src'}
     }
 }
 
 
 
-//タスクを作成
+
+
+
 //とある値の情報を表示する
-task printTest {
+ext.printObjectInfo = {obj ->
+
+    println('==========Info Start==========');
+        
+    println("=====Method=====");
+    obj.metaClass.getMetaMethods().forEach({o -> println(o.getSignature())});
+    println("=====Property=====");
+    obj.metaClass.getProperties().forEach({o ->
+
+        print(String.format("(%s) %s", o.getType(), o.getName()));
+        if(obj instanceof Class)
+        {
+            println();
+            return;
+        }
+
+        def value = null;
+        try
+        {
+            value = o.getProperty(obj);
+            println(String.format("   =   (%s) %s", value?.class, value));
+        }
+        catch(Exception e)
+        {
+            println(" = [N/A]");
+        }
+    })
+
+    println("=====Object=====");
+    println(obj.class);
+    println(obj);
+    println('==========Info End==========');
+
+}
+
+
+//タスクを作成
+task printObject {
 
     //タスクの処理ではなく、設定を記述する
 
     //最後の処理を設定
     doLast {
-        println('==========Task Start==========');
-        
-        def obj = this.jar;
-        
-        println("=====Method=====");
-        obj.metaClass.getMetaMethods().forEach({MetaMethod o -> println(o.getSignature())});
-        println("=====Property=====");
-        obj.metaClass.getProperties().forEach({MetaProperty o -> 
 
-            print(String.format("(%s) %s", o.getType(), o.getName()));
-            if(obj instanceof Class)
-            {
-                println();
-                return;
-            }
-
-            def value = null;
-            try
-            {
-                value = o.getProperty(obj);
-                println(String.format("   =   (%s) %s", value?.class, value));
-            }
-            catch(Exception e)
-            {
-                println(" = [N/A]");
-            }
-        })
-
-        println("=====Object=====");
-        println(obj.class);
-        println(obj);
-        println('==========Task End==========');
+        rootProject.printObjectInfo(this)
     }
 
 }
 
 
+//タスク実行前に、タスクの依存関係を表示する
+gradle.taskGraph.whenReady {taskGraph ->
 
+    println "Found task graph: " + taskGraph
+    println "Found " + taskGraph.allTasks.size() + " tasks."
+
+    taskGraph.allTasks.forEach {task ->
+
+        println task
+        task.dependsOn.forEach {dep ->
+            println "  -dep   " + dep
+        }
+        
+        task.mustRunAfter.each {after -> 
+            println "  -after " + after
+        }
+    }
+}
 
 
 
