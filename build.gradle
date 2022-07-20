@@ -120,8 +120,21 @@ tasks.withType(JavaCompile) {
 
 eclipse {
 
-    classpath.downloadJavadoc = true
-    classpath.downloadSources = true
+    project {
+
+        buildCommand 'org.eclipse.buildship.core.gradleprojectbuilder'
+        natures 'org.eclipse.buildship.core.gradleprojectnature'
+    }
+
+    classpath {
+
+        downloadJavadoc = true
+        downloadSources = true
+
+        //Gradleが管理する依存関係を伝える
+        containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
+    }
+
 
     jdt {
         apt {
@@ -136,7 +149,24 @@ eclipse.classpath.file {
     //.classpathに変更を適用したときの動作
 	whenMerged {classpath ->
 
-        //classpath.entries.removeAll {entry -> entry.kind == 'src'}
+        //依存関係の余計な記述を削除
+        classpath.entries.removeAll {entry -> entry.kind == 'lib'}
+
+        //テスト用リソースをライブラリとして扱う。
+        //このことで、.javaファイルをそのままリソースにできる。
+        for(String path : sourceSets.test.resources.srcDirs)
+        {
+            println path;
+            def file = file(path);
+            def refFile = fileReference(file);
+            def lib = new org.gradle.plugins.ide.eclipse.model.Library(refFile);
+
+            path = path.replaceAll("\\\\", "/");
+            classpath.entries.removeAll {e -> e.kind == 'src' && path.endsWith(e.path)}
+            classpath.entries << lib;
+        }
+
+
     }
 }
 
