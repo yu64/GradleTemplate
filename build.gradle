@@ -1,40 +1,38 @@
 
-
 //Gradleプラグインの指定
 plugins {
 
     id 'application'
     id 'java-library'
     id 'eclipse'
+    id 'jacoco'
 
     //fat-jar作成プラグイン
     id 'com.github.johnrengelman.shadow' version '5.0.0'
 
+    //AnnotationProcessorによって生成されたクラスをIDEに適用するプラグイン
+    id "com.diffplug.eclipse.apt" version "3.37.1"
 };
 
-eclipse {
 
-        classpath.downloadJavadoc = true
-        classpath.downloadSources = true
-}
 
-//アプリケーションの設定
-application {
+//==========================================================================
+//依存関係
+//==========================================================================
 
-    //エントリーポイント
-    mainClassName = 'test.Main'
-}
+
 
 //変数定義
 ext {
 
+    //最も上にあるパッケージ名
+    topPackage = "test";
 }
 
 //構成定義
 configurations {
 
 }
-
 
 //ライブラリの取得元となるリポジトリを指定
 repositories {
@@ -49,12 +47,45 @@ repositories {
 }
 
 //依存関係(ライブラリ)を指定
+//MavenRepository  https://mvnrepository.com/
 dependencies {
 
-    //implementation "AAAA:BBBB:VVVV"
+    //implementation "[Group]:[ArtifactId]:[Version]"
     //implementation fileTree(dir: 'lib', include: ["*"]);
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+
 }
 
+
+
+//==========================================================================
+//成果物
+//==========================================================================
+
+
+
+//成果物を設定
+artifacts {
+
+    //[configurations内の名前] [作成タスク]
+}
+
+
+
+//==========================================================================
+//Java
+//==========================================================================
+
+
+
+//アプリケーションの設定
+application {
+
+    //エントリーポイント
+    mainClassName = "${topPackage}.Main"
+}
 
 //javaの設定
 java {
@@ -69,7 +100,7 @@ java {
 //jarの設定
 jar {
     manifest {
-        
+        attributes "Main-Class": application.mainClassName
     }
 }
 
@@ -81,18 +112,27 @@ tasks.withType(JavaCompile) {
 
 
 
+//==========================================================================
+//Eclipse (VS Code)
+//==========================================================================
 
-//成果物を設定
-artifacts {
 
-    //[configurations内の名前] [作成タスク]
+
+eclipse {
+
+    classpath.downloadJavadoc = true
+    classpath.downloadSources = true
+
+    jdt {
+        apt {
+            genSrcDir = file('build/generated/sources/annotationProcessor/java/main')
+            genTestSrcDir = file('build/generated/sources/annotationProcessor/java/test')
+        }
+    }
 }
-
-
 
 eclipse.classpath.file {
 
-    
     //.classpathに変更を適用したときの動作
 	whenMerged {classpath ->
 
@@ -102,6 +142,35 @@ eclipse.classpath.file {
 
 
 
+//==========================================================================
+//テスト
+//==========================================================================
+
+
+
+tasks.named('test') {
+
+    useJUnitPlatform()
+}
+
+jacoco{
+
+    ext.reportsDirPath = "${buildDir}/reports/jacoco";
+    reportsDirectory = file(ext.reportsDirPath)
+}
+
+jacocoTestReport.doLast {
+
+    def url = new URL("file://${jacoco.ext.reportsDirPath}/test/html/index.html");
+    java.awt.Desktop.getDesktop().browse(url.toURI());
+    
+}
+
+
+
+//==========================================================================
+//情報表示
+//==========================================================================
 
 
 
@@ -154,6 +223,13 @@ task printObject {
     }
 
 }
+
+
+
+//==========================================================================
+//タスク表示
+//==========================================================================
+
 
 
 //タスク実行前に、タスクの依存関係を表示する
