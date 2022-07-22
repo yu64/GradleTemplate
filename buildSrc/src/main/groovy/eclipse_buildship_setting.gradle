@@ -1,0 +1,71 @@
+
+
+plugins {
+
+    id 'eclipse_setting'
+}
+
+//==========================================================================
+//Ecipse buildshipの設定
+//==========================================================================
+
+
+ext {
+
+    isLibOfResource = false;
+}
+
+eclipse {
+
+    project {
+
+        buildCommand 'org.eclipse.buildship.core.gradleprojectbuilder'
+        natures 'org.eclipse.buildship.core.gradleprojectnature'
+    }
+
+    classpath.containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
+    
+}
+
+
+
+eclipse.classpath.file.whenMerged {classpath ->
+
+    if(!this.ext.isLibOfResource)
+    {
+        return;
+    }
+
+    //依存関係の余計な記述を削除
+    classpath.entries.removeAll {entry -> entry.kind == 'lib'}
+
+    //テスト用リソースをライブラリとして扱う。
+    //このことで、.javaファイルをそのままリソースにできる。
+    for(String path : sourceSets.test.resources.srcDirs)
+    {
+        println path;
+        def file = file(path);
+        def refFile = fileReference(file);
+        def lib = new org.gradle.plugins.ide.eclipse.model.Library(refFile);
+
+        path = path.replaceAll("\\\\", "/");
+        classpath.entries.removeAll {e -> e.kind == 'src' && path.endsWith(e.path)}
+        classpath.entries << lib;
+    }
+
+}
+
+
+
+tasks.eclipse.doFirst {
+    
+    File prefs = file(".settings/org.eclipse.buildship.core.prefs")
+    if(!prefs.exists())
+    {
+        prefs.append('''
+            connection.project.dir=
+            eclipse.preferences.version=1
+            '''.stripIndent())
+    }
+}
+

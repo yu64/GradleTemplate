@@ -1,4 +1,11 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-
+    "files.exclude": {
+        "**/.gitattributes": true,
+        "**/.gitignore": true,
+        "**/gradlew": true,
+        "**/bin": true,
+        "**/gradle": true,
+        "**/LICENSE": true,
+      },
 }

@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<factorypath/>
+<factorypath>
+	<factorypathentry kind="EXTJAR" id="C:\Users\x20u046\.gradle\caches\modules-2\files-2.1\one.equinox\symbols\0.0.4\82c9ae5e388fea4cc3be320396ecc21423530a8a\symbols-0.0.4.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>

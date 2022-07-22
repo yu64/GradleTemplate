@@ -1,0 +1,17 @@
+
+plugins {
+    
+    id 'groovy-gradle-plugin'
+}
+
+
+repositories {
+    
+    gradlePluginPortal()
+}
+
+dependencies {
+
+    implementation 'com.diffplug.eclipse.apt:com.diffplug.eclipse.apt.gradle.plugin:3.29.1'
+
+}
