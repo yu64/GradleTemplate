@@ -67,6 +67,7 @@ task printObject {
 //タスク実行前に、タスクの依存関係を表示する
 gradle.taskGraph.whenReady {taskGraph ->
 
+    println "Task >>> ======================================"
     println "Found task graph: " + taskGraph
     println "Found " + taskGraph.allTasks.size() + " tasks."
 
@@ -81,4 +82,5 @@ gradle.taskGraph.whenReady {taskGraph ->
             println "  -after " + after
         }
     }
+    println "<<< Task ======================================"
 }
