@@ -56,16 +56,16 @@ eclipse.classpath.file.whenMerged {classpath ->
 }
 
 
+tasks.eclipse.doLast {
 
-tasks.eclipse.doFirst {
-    
     File prefs = file(".settings/org.eclipse.buildship.core.prefs")
     if(!prefs.exists())
     {
+        java.nio.file.Files.createDirectories(prefs.toPath().getParent());
+        prefs.createNewFile();
         prefs.append('''
             connection.project.dir=
             eclipse.preferences.version=1
             '''.stripIndent())
     }
 }
-
