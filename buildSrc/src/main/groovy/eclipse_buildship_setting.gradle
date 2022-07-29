@@ -37,7 +37,16 @@ eclipse.classpath.file.whenMerged {classpath ->
     }
 
     //依存関係の余計な記述を削除
-    classpath.entries.removeAll {entry -> entry.kind == 'lib'}
+    classpath.entries.removeAll {entry -> 
+
+        if(entry.kind == 'lib' && entry instanceof org.gradle.plugins.ide.eclipse.model.Library)
+        {
+            println "delete classpath entry: " + entry.path;
+            return true;
+        } 
+
+        return false;
+    }
 
     //テスト用リソースをライブラリとして扱う。
     //このことで、.javaファイルをそのままリソースにできる。
@@ -56,16 +65,35 @@ eclipse.classpath.file.whenMerged {classpath ->
 }
 
 
+import java.nio.file.Files;
+
+// org.eclipse.buildship.core.prefs の生成
 tasks.eclipse.doLast {
 
     File prefs = file(".settings/org.eclipse.buildship.core.prefs")
     if(!prefs.exists())
     {
-        java.nio.file.Files.createDirectories(prefs.toPath().getParent());
+        String path = "";
+        if(rootProject != this)
+        {
+            //サブプロジェクトの場合、ルートプロジェクトへの相対パスを求める。
+            def root = rootProject.projectDir.toPath();
+            def sub = projectDir.toPath();
+            path = sub.relativize(root).toString();
+        }
+
+
+        Files.createDirectories(prefs.toPath().getParent());
         prefs.createNewFile();
-        prefs.append('''
-            connection.project.dir=
+        prefs.append("""
+            connection.project.dir=$path
             eclipse.preferences.version=1
-            '''.stripIndent())
+            """.stripIndent())
     }
+}
+
+tasks.cleanEclipse.doFirst {
+
+    File prefs = file(".settings/org.eclipse.buildship.core.prefs")
+    prefs.delete();
 }

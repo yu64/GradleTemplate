@@ -4,9 +4,16 @@
         ".gitattributes": true,
         ".gitignore": true,
         "gradlew": true,
-        "bin": true,
+        "**/bin": true,
         "gradle": true,
         "LICENSE": true,
-        ".gradle": true,
+        "**/.gradle": true,
+        ".eclipse_sample": true,
+        "**/sample.gradle": true,
+
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true,
       },
 }
