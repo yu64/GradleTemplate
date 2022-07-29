@@ -39,27 +39,13 @@ eclipse.classpath.file.whenMerged {classpath ->
     //依存関係の余計な記述を削除
     classpath.entries.removeAll {entry -> 
 
-        if(entry.kind == 'lib' && entry instanceof org.gradle.plugins.ide.eclipse.model.Library)
+        if(entry.kind == 'lib')
         {
             println "delete classpath entry: " + entry.path;
             return true;
         } 
 
         return false;
-    }
-
-    //テスト用リソースをライブラリとして扱う。
-    //このことで、.javaファイルをそのままリソースにできる。
-    for(String path : sourceSets.test.resources.srcDirs)
-    {
-        println path;
-        def file = file(path);
-        def refFile = fileReference(file);
-        def lib = new org.gradle.plugins.ide.eclipse.model.Library(refFile);
-
-        path = path.replaceAll("\\\\", "/");
-        classpath.entries.removeAll {e -> e.kind == 'src' && path.endsWith(e.path)}
-        classpath.entries << lib;
     }
 
 }
