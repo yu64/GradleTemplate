@@ -5,10 +5,10 @@ import one.equinox.symbols.Symbolize;
 @Symbolize
 public class SymbolTest {
 
-    private String test;
+    private String value;
 
     public String getValue()
     {
-        return this.test;
+        return this.value;
     }
 }
