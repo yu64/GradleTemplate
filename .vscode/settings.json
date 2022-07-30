@@ -1,19 +1,34 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "files.exclude": {
-        ".gitattributes": true,
-        ".gitignore": true,
-        "gradlew": true,
-        "**/bin": true,
-        "gradle": true,
-        "LICENSE": true,
-        "**/.gradle": true,
-        ".eclipse_sample": true,
-        "**/sample.gradle": true,
 
+        //Git
+        "**/.gitattributes": true,
+        "**/.gitignore": true,
+        "**/.gitmodules": true,
+
+        //submodule buildSrc
+        "buildSrc/gradlew.bat": true,
+        "buildSrc/README.*": true,
+        "buildSrc/settings.gradle": true,
+        "buildSrc/build": true,
+
+        //Eclipse
         "**/.classpath": true,
         "**/.project": true,
         "**/.settings": true,
         "**/.factorypath": true,
+        ".eclipse_sample": true,
+        "**/bin": true,
+
+        //Gradle
+        "**/gradlew": true,
+        "**/gradle": true,
+        "**/.gradle": true,
+        "**/sample.gradle": true,
+
+        //Other
+        "**/LICENSE": true,
+
       },
 }
