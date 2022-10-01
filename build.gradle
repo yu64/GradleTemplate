@@ -9,6 +9,7 @@ plugins {
     id 'java_app_setting'
     id 'java_test_setting'
     id 'jacoco_setting'
+    id 'javadoc_setting'
     
     id 'eclipse_setting'
     id 'eclipse_buildship_setting'
@@ -18,7 +19,6 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.0.0'
 
 }
-
 
 
 //Maven https://mvnrepository.com/
