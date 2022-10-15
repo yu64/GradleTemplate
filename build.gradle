@@ -14,11 +14,22 @@ plugins {
     id 'eclipse_setting'
     id 'eclipse_buildship_setting'
     id 'eclipse_annotation_setting'
+
+   //fat-jar作成プラグイン
+    id 'com.github.johnrengelman.shadow' version '5.0.0'
+
 }
 
 
+//Maven https://mvnrepository.com/
 dependencies {
 
+    //implementation fileTree(dir: 'lib', include: ["*"])
 
+    testImplementation 'one.equinox:symbols:0.0.4'
+
+    annotationProcessor 'one.equinox:symbols:0.0.4'
+    testAnnotationProcessor 'one.equinox:symbols:0.0.4'
 }
+
 
