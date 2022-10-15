@@ -1,0 +1,86 @@
+
+
+//==========================================================================
+//情報表示
+//==========================================================================
+
+
+
+//とある値の情報を表示する
+ext.printObjectInfo = {obj ->
+
+    println('==========Info Start==========');
+        
+    println("=====Method=====");
+    obj.metaClass.getMetaMethods().forEach({o -> println(o.getSignature())});
+    println("=====Property=====");
+    obj.metaClass.getProperties().forEach({o ->
+
+        print(String.format("(%s) %s", o.getType(), o.getName()));
+        if(obj instanceof Class)
+        {
+            println();
+            return;
+        }
+
+        def value = null;
+        try
+        {
+            value = o.getProperty(obj);
+            println(String.format("   =   (%s) %s", value?.class, value));
+        }
+        catch(Exception e)
+        {
+            println(" = [N/A]");
+        }
+    })
+
+    println("=====Object=====");
+    println(obj.class);
+    println(obj);
+    println('==========Info End==========');
+
+}
+
+
+//タスクを作成
+task printObject {
+
+    //タスクの処理ではなく、設定を記述する
+
+    //最後の処理を設定
+    doLast {
+
+        rootProject.printObjectInfo(this)
+    }
+
+}
+
+
+
+//==========================================================================
+//タスク表示
+//==========================================================================
+
+
+
+//タスク実行前に、タスクの依存関係を表示する
+gradle.taskGraph.whenReady {taskGraph ->
+
+    println "Task >>> ======================================"
+    println "Found task graph: " + taskGraph
+    println "Found " + taskGraph.allTasks.size() + " tasks."
+
+    taskGraph.allTasks.forEach {task ->
+
+        println task
+        task.dependsOn.forEach {dep ->
+            println "  -dep   " + dep
+        }
+        
+        task.mustRunAfter.each {after -> 
+            println "  -after " + after
+        }
+    }
+    println "<<< Task ======================================"
+}

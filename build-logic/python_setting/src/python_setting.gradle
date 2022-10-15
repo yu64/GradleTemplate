@@ -1,0 +1,31 @@
+
+
+plugins {
+
+    //Condaを自動的にインストールして、仮想環境でPythonを実行するプラグイン
+    id 'com.pswidersk.python-plugin'
+}
+
+//==========================================================================
+//Pythonの設定
+//==========================================================================
+
+pythonPlugin {
+
+
+}
+
+
+
+task resolveLibrary(type: com.pswidersk.gradle.python.VenvTask) {
+
+    venvExec = "pip"
+    args = ["install", "--isolated", "-r", "requirements.txt"]
+}
+
+task runPython(type: com.pswidersk.gradle.python.VenvTask) {
+
+    workingDir = file("./src/main/python");
+    args = ["main.py"]
+    dependsOn resolveLibrary
+}

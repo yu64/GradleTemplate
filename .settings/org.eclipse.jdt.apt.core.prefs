@@ -1,7 +1,0 @@
-#
-#Sat Jul 30 08:11:47 JST 2022
-org.eclipse.jdt.apt.aptEnabled=true
-org.eclipse.jdt.apt.genTestSrcDir=build\\generated\\sources\\annotationProcessor\\java\\test
-org.eclipse.jdt.apt.reconcileEnabled=true
-org.eclipse.jdt.apt.genSrcDir=build\\generated\\sources\\annotationProcessor\\java\\main
-eclipse.preferences.version=1

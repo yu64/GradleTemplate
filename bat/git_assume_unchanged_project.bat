@@ -1,5 +1,7 @@
 @echo off
 
+cd ../%~dp0
+
 for /F "usebackq" %%i in (`git ls-files`) do (
 
     echo %%i | findstr ".project" > NUL

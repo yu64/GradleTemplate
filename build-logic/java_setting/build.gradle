@@ -1,0 +1,26 @@
+
+plugins {
+    
+    id 'groovy-gradle-plugin'
+}
+
+
+repositories {
+    
+    gradlePluginPortal()
+}
+
+dependencies {
+
+    //[Name]:[Name].gradle.plugin:[Version]
+
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src']
+        }
+    }
+
+}

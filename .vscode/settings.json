@@ -1,5 +1,8 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
+    "terminal.integrated.env.windows": {
+      "PSExecutionPolicyPreference": "RemoteSigned"
+    },
     "files.exclude": {
 
         //Git
@@ -7,11 +10,14 @@
         "**/.gitignore": true,
         "**/.gitmodules": true,
 
-        //submodule buildSrc
+        //buildSrc
         "buildSrc/gradlew.bat": true,
         "buildSrc/README.*": true,
         "buildSrc/settings.gradle": true,
         "buildSrc/build": true,
+
+        //build-logic
+        "build-logic/**/build": true,
 
         //Eclipse
         "**/.classpath": true,
