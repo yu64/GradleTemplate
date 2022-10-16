@@ -1,8 +1,8 @@
 
 plugins {
 
-    id 'java_setting'
-    id 'application'
+    id("java_setting")
+    id("application")
 }
 
 

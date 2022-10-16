@@ -8,11 +8,11 @@
 //一番上に記述すること
 this.plugins({PluginDependenciesSpec o ->
 
-    //id 'NAME'
-    //id 'NAME' version 'VERSION'
+    //id("NAME")
+    //id("NAME" version "VERSION")
 
-    id('java-library')
-    id('com.github.johnrengelman.shadow').version('5.0.0');
+    id("java-library")
+    id("com.github.johnrengelman.shadow").version("5.0.0");
 });
 
 //ライブラリの取得元となるリポジトリを指定
@@ -29,16 +29,16 @@ this.repositories({RepositoryHandler o ->
 //参考 https://mvnrepository.com/
 this.dependencies({DependencyHandler o ->
 
-    //implementation "AAAA:BBBB:VVVV"
+    //implementation("AAAA:BBBB:VVVV")
     
-    //o.implementation(this.fileTree(dir: 'lib', include: ["*"]));
+    //o.implementation(this.fileTree(dir: "lib", include: ["*"]));
 });
 
 //タスクを作成
 //参考 https://qiita.com/opengl-8080/items/0a192b62ee87d8ac7578
-this.task('printTest', {
+this.task("printTest", {
 
-    println('==========Task Start==========');
+    println("==========Task Start==========");
     
     def obj = this;
     println("=====Object=====")
@@ -49,7 +49,7 @@ this.task('printTest', {
     println("=====Property=====")
     obj.metaClass.getProperties().forEach({MetaProperty o -> println(o.getType().toString() + " : " + o.getName())})
 
-    println('==========Task End==========');
+    println("==========Task End==========");
 });
 
 
@@ -73,7 +73,7 @@ this.java({
 //参考 https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/compile/JavaCompile.html
 this.getTasks().withType(JavaCompile, {JavaCompile o ->
 
-	o.getOptions().encoding = 'UTF-8';
+	o.getOptions().encoding = "UTF-8";
 });
 
 //jarの設定(プラグイン)
@@ -81,7 +81,7 @@ this.jar({
 
     manifest({
         
-        attributes('Main-Class': 'test.Main');
+        attributes("Main-Class": "test.Main");
     });
 });
 

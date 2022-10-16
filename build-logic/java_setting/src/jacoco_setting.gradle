@@ -1,8 +1,8 @@
 
 plugins {
     
-    id 'jacoco'
-    id 'java_test_setting'
+    id("jacoco")
+    id("java_test_setting")
 }
 
 

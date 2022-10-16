@@ -2,4 +2,4 @@
 
 rootProject.name = "GradleTemplate"
 
-includeBuild('build-logic')
+includeBuild("build-logic")

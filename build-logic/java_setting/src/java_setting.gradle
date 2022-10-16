@@ -1,7 +1,7 @@
 
 plugins {
 
-    id 'java-library'
+    id("java-library")
 }
 
 
@@ -37,5 +37,5 @@ jar {
 //タスクのうち指定のクラスに一致するものに対して処理を行う
 tasks.withType(JavaCompile) {
 
-	options.encoding = 'UTF-8'
+	options.encoding = "UTF-8"
 }

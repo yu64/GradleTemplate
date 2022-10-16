@@ -1,7 +1,7 @@
 
 plugins {
 
-    id 'java_setting'
+    id("java_setting")
 }
 
 
@@ -11,15 +11,15 @@ plugins {
 
 javadoc {
 
-    options.charSet = 'UTF-8'
-    options.encoding = 'UTF-8'
+    options.charSet = "UTF-8"
+    options.encoding = "UTF-8"
 
 }
 
 tasks.withType(Javadoc) {
 
-	options.charSet = 'UTF-8'
-    options.encoding = 'UTF-8'
+	options.charSet = "UTF-8"
+    options.encoding = "UTF-8"
 
 }
 

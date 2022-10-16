@@ -2,10 +2,10 @@
 
 plugins {
 
-    id 'eclipse_setting'
+    id("eclipse_setting")
 
     //AnnotationProcessorによって生成されたクラスをIDEに適用するプラグイン
-    id "com.diffplug.eclipse.apt"
+    id("com.diffplug.eclipse.apt")
 
 }
 
@@ -20,13 +20,13 @@ eclipse {
     
     jdt {
         apt {
-            genSrcDir = file('build/generated/sources/annotationProcessor/java/main')
-            genTestSrcDir = file('build/generated/sources/annotationProcessor/java/test')
+            genSrcDir = file("build/generated/sources/annotationProcessor/java/main")
+            genTestSrcDir = file("build/generated/sources/annotationProcessor/java/test")
         }
 
         file.withProperties { p ->
         
-            p.put 'org.eclipse.jdt.core.compiler.processAnnotations', 'enabled'
+            p.put "org.eclipse.jdt.core.compiler.processAnnotations", "enabled"
         }
     }
 }

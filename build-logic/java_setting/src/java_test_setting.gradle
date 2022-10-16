@@ -2,8 +2,8 @@
 
 plugins {
 
-    id 'java_setting'
-    id 'repository_setting'
+    id("java_setting")
+    id("repository_setting")
 }
 
 //==========================================================================
@@ -13,10 +13,10 @@ plugins {
 
 dependencies {
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
 }
 
-tasks.named('test') {
+tasks.named("test") {
 
     useJUnitPlatform()
 }

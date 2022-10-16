@@ -3,7 +3,7 @@
 plugins {
 
     //Condaを自動的にインストールして、仮想環境でPythonを実行するプラグイン
-    id 'com.pswidersk.python-plugin'
+    id("com.pswidersk.python-plugin")
 }
 
 //==========================================================================

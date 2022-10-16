@@ -1,7 +1,7 @@
 
 plugins {
     
-    id 'groovy-gradle-plugin'
+    id("groovy-gradle-plugin")
 }
 
 
@@ -19,7 +19,7 @@ dependencies {
 sourceSets {
     main {
         groovy {
-            srcDirs = ['src']
+            srcDirs("src")
         }
     }
 

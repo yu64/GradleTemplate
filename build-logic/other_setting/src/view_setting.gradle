@@ -9,7 +9,7 @@
 //とある値の情報を表示する
 ext.printObjectInfo = {obj ->
 
-    println('==========Info Start==========');
+    println("==========Info Start==========");
         
     println("=====Method=====");
     obj.metaClass.getMetaMethods().forEach({o -> println(o.getSignature())});
@@ -38,7 +38,7 @@ ext.printObjectInfo = {obj ->
     println("=====Object=====");
     println(obj.class);
     println(obj);
-    println('==========Info End==========');
+    println("==========Info End==========");
 
 }
 
