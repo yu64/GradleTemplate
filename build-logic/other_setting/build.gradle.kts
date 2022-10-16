@@ -1,7 +1,8 @@
 
 plugins {
     
-    id("groovy-gradle-plugin")
+    //標準のプラグインは、記述を省略できる
+    `kotlin-dsl`
 }
 
 
@@ -13,14 +14,5 @@ repositories {
 dependencies {
 
     //[Name]:[Name].gradle.plugin:[Version]
-
-}
-
-sourceSets {
-    main {
-        groovy {
-            srcDirs("src")
-        }
-    }
 
 }

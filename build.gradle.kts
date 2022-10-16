@@ -16,7 +16,7 @@ plugins {
     id("eclipse_annotation_setting")
 
     //fat-jar作成プラグイン
-    id("com.github.johnrengelman.shadow").version("5.0.0")
+    id("com.github.johnrengelman.shadow") version "5.0.0" 
 
 }
 
