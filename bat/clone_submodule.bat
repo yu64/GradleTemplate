@@ -1,4 +1,5 @@
 
-cd ../%~dp0
+cd "%~dp0"
+cd ..
 
 git submodule update --init --recursive

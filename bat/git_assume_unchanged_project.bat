@@ -1,6 +1,7 @@
 @echo off
 
-cd ../%~dp0
+cd "%~dp0"
+cd ..
 
 for /F "usebackq" %%i in (`git ls-files`) do (
 
