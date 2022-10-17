@@ -6,6 +6,6 @@ build
 
 # Ignore eclipse bin
 bin
-**/.classpath
-**/.factorypath
-**/.settings
+.classpath
+.factorypath
+.settings
