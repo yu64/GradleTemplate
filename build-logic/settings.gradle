@@ -6,4 +6,5 @@ include("other_setting")
 include("java_setting")
 include("eclipse_setting")
 include("python_setting")
+include("servlet_setting")
 
