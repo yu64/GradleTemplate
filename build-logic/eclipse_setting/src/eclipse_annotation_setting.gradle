@@ -3,6 +3,7 @@
 plugins {
 
     id("eclipse_setting")
+    id("java")
 
     //AnnotationProcessorによって生成されたクラスをIDEに適用するプラグイン
     id("com.diffplug.eclipse.apt")

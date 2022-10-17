@@ -1,4 +1,4 @@
 
 cd ../%~dp0
 
-gradlew eclipseJdtApt eclipseJdt eclipseFactorypath
+gradlew cleanEclipse eclipse eclipseJdtApt eclipseJdt eclipseFactorypath
