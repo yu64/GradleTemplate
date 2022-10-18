@@ -3,16 +3,19 @@
 plugins {
 
     //Condaを自動的にインストールして、仮想環境でPythonを実行するプラグイン
+    //sourceSets main/python を定義
     id("com.pswidersk.python-plugin")
 }
 
 //==========================================================================
-//Pythonの設定
+//スタンドアローン Conda Pythonの設定
 //==========================================================================
+
 
 pythonPlugin {
 
-
+    //インストール先
+    installDir = file("${gradle.gradleUserHomeDir}/python/${pythonVersion.get()}/conda/${condaVersion.get()}");
 }
 
 
