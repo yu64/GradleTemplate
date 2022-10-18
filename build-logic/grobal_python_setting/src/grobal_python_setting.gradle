@@ -1,0 +1,34 @@
+
+
+plugins {
+
+    //既存のPythonとpipを利用して、仮想環境でPythonを実行するプラグイン
+    //ドキュメント https://xvik.github.io/gradle-use-python-plugin/latest/guide/configuration/#reference
+    id("ru.vyarus.use-python")
+}
+
+//==========================================================================
+//スタンドアローン Conda Pythonの設定
+//==========================================================================
+
+python {
+
+    envPath = ".gradle/python/env/${project.name}"
+
+}
+
+
+task runPythonHelloWorld(type: PythonTask) {
+    command = "-c \"print('===== Hello World! Gradle And Python!! =====')\""
+}
+
+task runPython(type: PythonTask) {
+    command = "src/main/python/main.py "
+}
+
+task runPipTest(type: ru.vyarus.gradle.plugin.python.task.pip.BasePipTask) {
+
+    pip.exec("list");
+
+}
+

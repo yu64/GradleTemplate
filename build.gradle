@@ -24,6 +24,9 @@ plugins {
     //Conda Python
     //id("conda_python_setting")
 
+    //Grobal Python
+    id("grobal_python_setting")
+
     //fat-jar作成プラグイン
     id("com.github.johnrengelman.shadow") version "5.0.0" 
 

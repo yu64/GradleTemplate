@@ -8,4 +8,5 @@ include("java_setting")
 include("servlet_setting")
 
 include("conda_python_setting")
+include("grobal_python_setting")
 
