@@ -19,6 +19,25 @@ pythonPlugin {
 }
 
 
+//==========================================================================
+//ファイル生成
+
+
+import java.nio.file.Path;
+import java.nio.file.Files;
+
+//requirements.txtが存在しない場合、作成する。
+//パッケージ検索 https://pypi.org/
+def packageJson = Path.of("${project.projectDir}/requirements.txt");
+if(!Files.exists(packageJson))
+{
+    Files.createFile(packageJson);
+}
+
+
+//==========================================================================
+//タスク
+
 
 task resolveLibrary(type: com.pswidersk.gradle.python.VenvTask) {
 

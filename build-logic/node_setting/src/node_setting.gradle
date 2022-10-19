@@ -41,6 +41,11 @@ node {
 
 }
 
+
+//==========================================================================
+//ファイル生成
+
+
 import java.nio.file.Path;
 import java.nio.file.Files;
 
@@ -60,11 +65,14 @@ if(!Files.exists(packageJson))
 }
 
 
+//==========================================================================
+//タスク
+
 
 task runNodeJsHelloWorld(type: NodeTask) {
 
     //サンプルスクリプトを生成
-    def path = Path.of("${project.buildDir}/tmp/node/sample/helloworld.js");
+    def path = Path.of("${project.buildDir}/tmp/node/sample/hello_world.js");
     Files.createDirectories(path.getParent());
     Files.deleteIfExists(path)
     Files.createFile(path);

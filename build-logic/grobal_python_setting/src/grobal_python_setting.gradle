@@ -20,6 +20,15 @@ python {
 }
 
 
+//==========================================================================
+//タスク
+
+task pipInstallVirtualenv(type: PipInstallTask) {
+
+    pip("virtualenv:20.16.5")
+}
+
+
 task runPythonHelloWorld(type: PythonTask) {
     command = "-c \"print('===== Hello World! Gradle And Python!! =====')\""
 }
@@ -29,9 +38,13 @@ task runPython(type: PythonTask) {
 }
 
 
-task runPipTest(type: ru.vyarus.gradle.plugin.python.task.pip.BasePipTask) {
+task runPipSample(type: ru.vyarus.gradle.plugin.python.task.pip.BasePipTask) {
 
-    pip.exec("list");
+    doFirst {
+
+        pip.exec("list");
+    }
 
 }
+
 
