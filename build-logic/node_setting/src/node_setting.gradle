@@ -1,0 +1,36 @@
+
+
+plugins {
+
+    //NodeJsを管理するプラグイン
+    //ドキュメント https://github.com/node-gradle/gradle-node-plugin/blob/master/docs/usage.md
+    id("com.github.node-gradle.node")
+}
+
+//==========================================================================
+//Node.jsの設定
+//==========================================================================
+
+task runNodeJs(type: NodeTask) {
+  script = file('src/main/javascript/main.js')
+
+}
+
+task npmInit(type: NpmTask) {
+
+    args = ['init']
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
