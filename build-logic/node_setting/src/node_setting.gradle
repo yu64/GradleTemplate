@@ -45,6 +45,22 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 
 
+//package.jsonが存在しない場合、作成する。
+//パッケージ検索 https://www.npmjs.com/
+def packageJson = Path.of("${project.projectDir}/package.json");
+if(!Files.exists(packageJson))
+{
+    Files.createFile(packageJson);
+    Files.write(packageJson, [
+        "{",
+        "  \"dependencies\": {",
+        "  }",
+        "}"
+        ]);
+}
+
+
+
 task runNodeJsHelloWorld(type: NodeTask) {
 
     //サンプルスクリプトを生成
@@ -58,20 +74,21 @@ task runNodeJsHelloWorld(type: NodeTask) {
 }
 
 task runNodeJs(type: NodeTask) {
-    
+
   script = file('src/main/javascript/main.js')
 
 }
 
-task npmInit(type: NpmTask) {
+task npmList(type: NpmTask) {
 
-    args = ['init']
+    args = ['list']
 }
 
-task npmTest(type: NpmTask) {
+task npmInstallSample(type: NpmTask) {
 
-    args = ['install', 'express']
+    args = ["install", "debug"]
 }
+
 
 
 

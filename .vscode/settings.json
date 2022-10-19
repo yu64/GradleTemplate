@@ -33,8 +33,13 @@
         "**/.gradle": true,
         "**/sample.gradle": true,
 
+        //Node.js
+        "node_modules": true,
+        "package-lock.json": true,
+
         //Other
         "**/LICENSE": true,
+
 
       },
 }

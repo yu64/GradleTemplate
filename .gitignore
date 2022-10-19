@@ -4,8 +4,12 @@
 # Ignore Gradle build output directory
 build
 
-# Ignore eclipse bin
+# Ignore eclipse
 bin
 .classpath
 .factorypath
 .settings
+
+# Ignore Node.js
+package-lock.json
+node_modules
