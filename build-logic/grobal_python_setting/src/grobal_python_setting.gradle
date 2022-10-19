@@ -8,11 +8,13 @@ plugins {
 }
 
 //==========================================================================
-//スタンドアローン Conda Pythonの設定
+//グローバル上のPythonを用いた仮想環境の設定
 //==========================================================================
 
 python {
 
+    //仮想環境の位置
+    //マルチプロジェクトの場合でも、環境が分離されるように設定している
     envPath = ".gradle/python/env/${project.name}"
 
 }
@@ -25,6 +27,7 @@ task runPythonHelloWorld(type: PythonTask) {
 task runPython(type: PythonTask) {
     command = "src/main/python/main.py "
 }
+
 
 task runPipTest(type: ru.vyarus.gradle.plugin.python.task.pip.BasePipTask) {
 

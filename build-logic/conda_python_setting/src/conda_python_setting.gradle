@@ -15,7 +15,7 @@ plugins {
 pythonPlugin {
 
     //インストール先
-    installDir = file("${gradle.gradleUserHomeDir}/python/${pythonVersion.get()}/conda/${condaVersion.get()}");
+    installDir = file("${gradle.gradleUserHomeDir}/conda/${condaVersion.get()}");
 }
 
 
