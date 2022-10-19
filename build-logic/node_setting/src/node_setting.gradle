@@ -2,7 +2,7 @@
 
 plugins {
 
-    //NodeJsを管理するプラグイン
+    //Node.jsを管理するプラグイン
     //ドキュメント https://github.com/node-gradle/gradle-node-plugin/blob/master/docs/usage.md
     id("com.github.node-gradle.node")
 }
@@ -11,7 +11,54 @@ plugins {
 //Node.jsの設定
 //==========================================================================
 
+ext {
+
+    //ダウンロード先をユーザホームにするか
+    downloadToUserHome = true;
+}
+
+
+node {
+
+    //Node.jsをダウンロードする。falseの場合、グローバル上のNode.jsを使用する
+    download = true
+    version = "16.18.0"
+
+
+    if(downloadToUserHome)
+    {
+        workDir = file("${gradle.gradleUserHomeDir}/nodejs/${project.name}")
+        npmWorkDir = file("${gradle.gradleUserHomeDir}/npm/${project.name}")
+        yarnWorkDir = file("${gradle.gradleUserHomeDir}/yarn/${project.name}")
+    }
+    else
+    {
+        workDir = file("${project.projectDir}/.gradle/nodejs")
+        npmWorkDir = file("${project.projectDir}/.gradle/npm")
+        yarnWorkDir = file("${project.projectDir}/.gradle/yarn")
+    }
+
+
+}
+
+import java.nio.file.Path;
+import java.nio.file.Files;
+
+
+task runNodeJsHelloWorld(type: NodeTask) {
+
+    //サンプルスクリプトを生成
+    def path = Path.of("${project.buildDir}/tmp/node/sample/helloworld.js");
+    Files.createDirectories(path.getParent());
+    Files.deleteIfExists(path)
+    Files.createFile(path);
+    Files.write(path, ["console.log(\"===== Hello World! Gradle And Node.js!! =====\")"])
+
+    script = path.toFile();
+}
+
 task runNodeJs(type: NodeTask) {
+    
   script = file('src/main/javascript/main.js')
 
 }
@@ -19,6 +66,11 @@ task runNodeJs(type: NodeTask) {
 task npmInit(type: NpmTask) {
 
     args = ['init']
+}
+
+task npmTest(type: NpmTask) {
+
+    args = ['install', 'express']
 }
 
 

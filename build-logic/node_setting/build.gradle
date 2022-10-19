@@ -14,7 +14,7 @@ dependencies {
 
     //[Name]:[Name].gradle.plugin:[Version]
     
-    //NodeJsを管理するプラグイン
+    //Node.jsを管理するプラグイン
     implementation("com.github.node-gradle.node:com.github.node-gradle.node.gradle.plugin:3.5.0")
 
 }
