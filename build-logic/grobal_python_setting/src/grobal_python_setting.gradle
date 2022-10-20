@@ -23,6 +23,11 @@ python {
 //==========================================================================
 //タスク
 
+
+import java.nio.file.Path;
+import java.nio.file.Files;
+
+
 task pipInstallVirtualenv(type: PipInstallTask) {
 
     pip("virtualenv:20.16.5")
@@ -46,5 +51,31 @@ task runPipSample(type: ru.vyarus.gradle.plugin.python.task.pip.BasePipTask) {
     }
 
 }
+
+task pipFreezeOut(type: ru.vyarus.gradle.plugin.python.task.pip.BasePipTask) {
+
+    doFirst {
+
+        def path = Path.of("${project.buildDir}/tmp/python/freeze.txt");
+        Files.createDirectories(path.getParent());
+        Files.deleteIfExists(path);
+        
+        pip.exec("freeze > \"${path.toString()}");
+    }
+}
+
+task pipUninstallFromFreeze(type: ru.vyarus.gradle.plugin.python.task.pip.BasePipTask, dependsOn: "pipFreezeOut") {
+
+    doFirst {
+
+        def path = Path.of("${project.buildDir}/tmp/python/freeze.txt");
+        if(Files.exists(path) && 0 < Files.size(path))
+        {
+            pip.exec("uninstall --yes -r \"${path.toString()}\"");
+        }
+
+    }
+}
+
 
 
