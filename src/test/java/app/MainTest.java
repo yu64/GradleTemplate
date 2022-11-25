@@ -1,10 +1,10 @@
-package test;
+package app;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import test.symbols.SymbolTestSymbols;
+import app.symbols.SymbolTestSymbols;
 
 
 public class MainTest {

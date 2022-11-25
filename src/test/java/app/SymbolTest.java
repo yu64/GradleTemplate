@@ -1,4 +1,4 @@
-package test;
+package app;
 
 import one.equinox.symbols.Symbolize;
 
