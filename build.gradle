@@ -21,11 +21,14 @@ plugins {
     //Servlet
     //id("servlet_setting")
 
+    //Embed Mysql
+    id("embed_mysql_setting")
+
     //Conda Python
     //id("conda_python_setting")
 
     //Grobal Python
-    //id("grobal_python_setting")
+    //id("global_python_setting")
 
     //Node.js
     id("node_setting")

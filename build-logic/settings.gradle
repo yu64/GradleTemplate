@@ -7,8 +7,10 @@ include("eclipse_setting")
 include("java_setting")
 include("servlet_setting")
 
+include("embed_mysql_setting")
+
 include("conda_python_setting")
-include("grobal_python_setting")
+include("global_python_setting")
 
 include("node_setting")
 
