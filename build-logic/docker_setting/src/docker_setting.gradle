@@ -49,7 +49,7 @@ dockerRun {
     image "${docker_image_name}:${docker_image_version}"
 
     //マウント(ローカル:コンテナ)
-    volumes(['.': '/project', "${gradle.gradleUserHomeDir}": '/.gradle'])
+    //volumes(['.': '/project', "${gradle.gradleUserHomeDir}": '/.gradle'])
 
     //ポート設定(ローカル:コンテナ)
     ports "${docker_access_port}:${docker_inner_port}"
@@ -58,7 +58,7 @@ dockerRun {
     env(['GRADLE_HOME': "/.gradle"])
 
     //コンテナ内で実行するコマンド
-    command 'sleep', '100'
+    //command 'echo', 'Hello Docker!!'
 
     //docker run コマンドの引数
     arguments '--privileged'
