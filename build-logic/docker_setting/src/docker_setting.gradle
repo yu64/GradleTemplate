@@ -52,12 +52,12 @@ dockerRun {
     //volumes 'docker_volume': '/project_volume'
 
     //ポート設定(ローカル:コンテナ)
-    ports '7080:5000'
+    ports '8080:80'
 
     daemonize true
     env 'MYVAR1': 'MYVALUE1', 'MYVAR2': 'MYVALUE2'
     command 'sleep', '100'
-    arguments '--hostname=custom', '-P'
+    arguments '--privileged'
 }
 
 
