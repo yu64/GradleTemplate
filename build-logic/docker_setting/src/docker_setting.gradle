@@ -22,6 +22,8 @@ ext {
     docker_image_version = "1.0.0"
     docker_image_name = "sample_image_name_${projectName}"
     docker_container_name = "sample_container_name_${projectName}"
+    docker_access_port = "8080"
+    docker_inner_port = "80"
 }
 
 
@@ -33,11 +35,7 @@ docker {
     name "${docker_image_name}:${docker_image_version}"
 
     //Docker File。 イメージの作成に使用する。
-    dockerfile file('dockerfile')
-
-    //ビルドコンテキストとして扱うファイル、ディレクトリ。
-    //取り込みたいものともいえる。
-    //files tasks.distTar.outputs, 'file1.txt', 'file2.txt'
+    dockerfile file('Dockerfile')
 
 }
 
@@ -49,20 +47,32 @@ dockerRun {
     image "${docker_image_name}:${docker_image_version}"
 
     //マウント(ローカル:コンテナ)
-    //volumes 'docker_volume': '/project_volume'
+    volumes(['.': '/project', "${gradle.gradleUserHomeDir}": '/.gradle'])
 
     //ポート設定(ローカル:コンテナ)
-    ports '8080:80'
+    ports "${docker_access_port}:${docker_inner_port}"
 
-    daemonize true
-    env 'MYVAR1': 'MYVALUE1', 'MYVAR2': 'MYVALUE2'
+    //Gradleから、環境変数の設定
+    env(['GRADLE_HOME': "/.gradle"])
+
+    //コンテナ内で実行するコマンド
     command 'sleep', '100'
+
+    //docker run コマンドの引数
     arguments '--privileged'
 }
 
 
+// docker inspect 
+task dockerInspect(type: Exec, group: "docker run", description: "print info with docker inspect.") {
+    
+    workingDir "."
 
+    def line = ['docker', 'inspect', docker_container_name]
+    commandLine(line)
 
+    doFirst {
 
-
-
+        println(line);
+    }
+}
