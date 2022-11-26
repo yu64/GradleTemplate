@@ -9,8 +9,11 @@ dependencies {
 
     //[Name]:[Name].gradle.plugin:[Version]
 
-    //Dockerを導入するプラグイン
+    //Dockerを呼び出すプラグイン
+    //ビルドおよびプッシュ
     implementation("com.palantir.docker:com.palantir.docker.gradle.plugin:0.34.0")
+    //実行
+    implementation("com.palantir.docker-run:com.palantir.docker-run.gradle.plugin:0.34.0")
 
 }
 

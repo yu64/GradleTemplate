@@ -4,10 +4,10 @@ plugins {
 
     //Dockerを呼び出すプラグイン
     //ドキュメント https://github.com/palantir/gradle-docker
-    //イメージ作成
+    //ビルドおよび、プッシュ
     id("com.palantir.docker")
-
-
+    //実行
+    id("com.palantir.docker-run")
 
 }
 
@@ -17,21 +17,52 @@ plugins {
 
 ext {
 
-    docker_version = "1.0.0"
-    docker_container_name = "SampleContainerName"
+    def projectName = project.name.toLowerCase();
+
+    docker_image_version = "1.0.0"
+    docker_image_name = "sample_image_name_${projectName}"
+    docker_container_name = "sample_container_name_${projectName}"
 }
 
 
 docker {
 
-    //コンテナ名
-    name "${docker_container_name}:${docker_version}"
+    //作成先は、Docker で確認できる。
 
-    //Docker File。 コンテナの作成に使用する。
+    //イメージ名
+    name "${docker_image_name}:${docker_image_version}"
+
+    //Docker File。 イメージの作成に使用する。
     dockerfile file('dockerfile')
 
     //ビルドコンテキストとして扱うファイル、ディレクトリ。
-    //コンテナに取り込みたいものともいえる。
+    //取り込みたいものともいえる。
     //files tasks.distTar.outputs, 'file1.txt', 'file2.txt'
 
 }
+
+
+dockerRun {
+
+    //コンテナ名
+    name "${docker_container_name}"
+    image "${docker_image_name}:${docker_image_version}"
+
+    //マウント(ローカル:コンテナ)
+    //volumes 'docker_volume': '/project_volume'
+
+    //ポート設定(ローカル:コンテナ)
+    ports '7080:5000'
+
+    daemonize true
+    env 'MYVAR1': 'MYVALUE1', 'MYVAR2': 'MYVALUE2'
+    command 'sleep', '100'
+    arguments '--hostname=custom', '-P'
+}
+
+
+
+
+
+
+

@@ -12,7 +12,7 @@ plugins {
 
 ext {
 
-    topPackage = "test"
+    topPackage = "app"
     mainClassName = "${topPackage}.Main"
 }
 
