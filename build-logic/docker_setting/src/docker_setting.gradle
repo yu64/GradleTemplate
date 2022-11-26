@@ -8,6 +8,8 @@ plugins {
     id("com.palantir.docker")
     //実行
     id("com.palantir.docker-run")
+    //docker-compose.yml
+    id("com.palantir.docker-compose")
 
 }
 
