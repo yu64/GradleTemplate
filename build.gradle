@@ -30,7 +30,7 @@ plugins {
     //id("node_setting")
 
     //Docker
-    //id("docker_setting")
+    id("docker_setting")
 
     //fat-jar作成プラグイン
     //id("com.github.johnrengelman.shadow") version "5.0.0" 

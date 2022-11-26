@@ -2,8 +2,9 @@
 
 plugins {
 
-    ////Dockerを導入するプラグイン
+    //Dockerを呼び出すプラグイン
     //ドキュメント https://github.com/palantir/gradle-docker
+    //イメージ作成
     id("com.palantir.docker")
 
 
@@ -26,11 +27,8 @@ docker {
     //コンテナ名
     name "${docker_container_name}:${docker_version}"
 
-    //Gradleタスク用の識別子
-    tag 'DockerContainer'
-
     //Docker File。 コンテナの作成に使用する。
-    dockerfile file('Dockerfile')
+    dockerfile file('dockerfile')
 
     //ビルドコンテキストとして扱うファイル、ディレクトリ。
     //コンテナに取り込みたいものともいえる。

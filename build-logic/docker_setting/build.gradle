@@ -10,8 +10,7 @@ dependencies {
     //[Name]:[Name].gradle.plugin:[Version]
 
     //Dockerを導入するプラグイン
-    //implementation("com.palantir.docker:com.palantir.docker.gradle.plugin:0.34.0")
-    //implementation("com.github.palantir:gradle-docker:0.31.0")
+    implementation("com.palantir.docker:com.palantir.docker.gradle.plugin:0.34.0")
 
 }
 

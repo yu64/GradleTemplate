@@ -36,7 +36,7 @@ include("global_python_setting")
 
 include("node_setting")
 
-//include("docker_setting")
+include("docker_setting")
 
 
 
