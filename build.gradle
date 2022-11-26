@@ -3,10 +3,9 @@ plugins {
     
     //独自プラグイン
     //基本
-    id("view_setting")
+    //id("view_setting")
 
     //Java
-    id("repository_setting")
     id("java_setting")
     id("java_app_setting")
     id("java_test_setting")
@@ -21,9 +20,6 @@ plugins {
     //Servlet
     //id("servlet_setting")
 
-    //Embed Mysql
-    id("embed_mysql_setting")
-
     //Conda Python
     //id("conda_python_setting")
 
@@ -31,10 +27,21 @@ plugins {
     //id("global_python_setting")
 
     //Node.js
-    id("node_setting")
+    //id("node_setting")
+
+    //Docker
+    //id("docker_setting")
 
     //fat-jar作成プラグイン
-    id("com.github.johnrengelman.shadow") version "5.0.0" 
+    //id("com.github.johnrengelman.shadow") version "5.0.0" 
+
+}
+
+repositories {
+
+    
+    google()
+    mavenCentral()
 
 }
 
@@ -43,11 +50,6 @@ plugins {
 dependencies {
 
     //implementation fileTree(dir: "lib", include: ["*"])
-
-    testImplementation("one.equinox:symbols:0.0.4")
-
-    annotationProcessor("one.equinox:symbols:0.0.4")
-    testAnnotationProcessor("one.equinox:symbols:0.0.4")
 }
 
 

@@ -1,5 +1,20 @@
 
 
+
+//プラグインの依存関係を解決するリポジトリ
+pluginManagement {
+    repositories {
+        
+      google()
+      mavenCentral()
+
+      //一部が jcenter に依存
+      gradlePluginPortal()
+    }
+}
+
+
+
 rootProject.name = "GradleTemplate"
 
 includeBuild("build-logic")

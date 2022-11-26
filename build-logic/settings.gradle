@@ -1,18 +1,42 @@
 
 
+
+
+
+//このbuild-logicの前提となるプラグインの依存関係を解決するリポジトリ
+//前提となるプラグイン -> 普通の依存関係
+dependencyResolutionManagement {
+
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositories {
+
+    google()
+    mavenCentral()
+
+    //一部が jcenter に依存
+    gradlePluginPortal()
+
+  }
+}
+
+
+
+
 rootProject.name = "build-logic"
 
-include("other_setting")
+//kotlin-dsl が jcenter に依存
+//include("other_setting")
+
 include("eclipse_setting")
 include("java_setting")
 include("servlet_setting")
-
-include("embed_mysql_setting")
 
 include("conda_python_setting")
 include("global_python_setting")
 
 include("node_setting")
+
+//include("docker_setting")
 
 
 

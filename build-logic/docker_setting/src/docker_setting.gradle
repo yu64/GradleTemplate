@@ -1,0 +1,39 @@
+
+
+plugins {
+
+    ////Dockerを導入するプラグイン
+    //ドキュメント https://github.com/palantir/gradle-docker
+    id("com.palantir.docker")
+
+
+
+}
+
+//==========================================================================
+//Dockerの設定
+//==========================================================================
+
+ext {
+
+    docker_version = "1.0.0"
+    docker_container_name = "SampleContainerName"
+}
+
+
+docker {
+
+    //コンテナ名
+    name "${docker_container_name}:${docker_version}"
+
+    //Gradleタスク用の識別子
+    tag 'DockerContainer'
+
+    //Docker File。 コンテナの作成に使用する。
+    dockerfile file('Dockerfile')
+
+    //ビルドコンテキストとして扱うファイル、ディレクトリ。
+    //コンテナに取り込みたいものともいえる。
+    //files tasks.distTar.outputs, 'file1.txt', 'file2.txt'
+
+}
