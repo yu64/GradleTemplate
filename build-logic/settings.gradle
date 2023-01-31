@@ -38,6 +38,8 @@ include("node_setting")
 
 include("docker_setting")
 
+include("plantuml_setting")
+
 
 
 

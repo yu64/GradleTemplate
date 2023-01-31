@@ -42,4 +42,5 @@
 
 
       },
+      "java.compile.nullAnalysis.mode": "disabled",
 }

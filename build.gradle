@@ -32,6 +32,9 @@ plugins {
     //Docker
     //id("docker_setting")
 
+    //PlantUML
+    id("plantuml_setting")
+
     //fat-jar作成プラグイン
     //id("com.github.johnrengelman.shadow") version "5.0.0" 
 
@@ -50,6 +53,7 @@ repositories {
 dependencies {
 
     //implementation fileTree(dir: "lib", include: ["*"])
+    //implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 }
 
 
