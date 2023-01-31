@@ -11,12 +11,35 @@ plugins {
 
 
 classDiagrams {
-  diagram {
-    name "Visualise Package"
-    include packages().withName("app")
-    writeTo file('class_diagram.puml')
+    diagram {
+        name "Visualise Package"
+        include packages().withName("app")
+        writeTo file('class_diagram.puml')
 
-    override association().from("*").to("*").with("--")
-    override extension().from("*").to("*").with("..")
-  }
+        override association().from("*").to("*").with("--")
+        override extension().from("*").to("*").with("..")
+    }
+}
+
+tasks.withType(io.gitlab.plunts.gradle.plantuml.plugin.GenerateClassDiagramsTask) {
+
+    doFirst {
+
+        println("タスク実行時の依存関係")
+        println("(このプラグインは、何か一つでも依存関係にライブラリがなければならない)")
+        println(project.sourceSets.getByName("main").getCompileClasspath().getFiles())
+    
+    }
+
+
+    
+}
+
+dependencies {
+
+    //このプラグインは、何か一つでも依存関係にライブラリがなければならない
+
+    //implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    //implementation 'io.github.classgraph:classgraph:4.8.154'
+
 }
