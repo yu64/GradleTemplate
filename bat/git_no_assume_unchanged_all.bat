@@ -1,7 +1,6 @@
 @echo off
 
-cd "%~dp0"
-cd ..
+cd %~dp0/..
 
 setlocal enabledelayedexpansion
 
@@ -15,7 +14,7 @@ for /F "usebackq delims=" %%i in (`git ls-files -v`) do (
 
 endlocal
 
-exit /b
+exit
 
 :inner
 

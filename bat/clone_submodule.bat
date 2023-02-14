@@ -1,5 +1,5 @@
 
-cd "%~dp0"
-cd ..
+rem "gitのサブモジュールをクローンする"
 
+cd %~dp0/..
 git submodule update --init --recursive

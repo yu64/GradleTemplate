@@ -1,4 +1,6 @@
 
+# Javaプロセスを全て停止する。
+
 # どこから実行しても、
 # このスクリプトがあるフォルダの、親のフォルダを、カレントディレクトリとする。
 $currentDir = Split-Path $MyInvocation.MyCommand.path;
