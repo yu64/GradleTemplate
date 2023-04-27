@@ -18,7 +18,7 @@ plugins {
     id("eclipse_annotation_setting")
 
     //Servlet
-    //id("servlet_setting")
+    id("servlet_setting")
 
     //Conda Python
     //id("conda_python_setting")
@@ -33,7 +33,7 @@ plugins {
     //id("docker_setting")
 
     //PlantUML
-    id("plantuml_setting")
+    //id("plantuml_setting")
 
     //fat-jar作成プラグイン
     //id("com.github.johnrengelman.shadow") version "5.0.0" 
