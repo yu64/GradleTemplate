@@ -1,13 +1,28 @@
 
+//==========================================================================
+//リポジトリの設定
+//==========================================================================
 
 
+//プラグインの依存関係を解決するリポジトリ
+pluginManagement {
+  repositories {
+      
+    google()
+    mavenCentral()
+
+    //一部が jcenter に依存
+    gradlePluginPortal()
+  }
+
+}
 
 
 //このbuild-logicの前提となるプラグインの依存関係を解決するリポジトリ
 //前提となるプラグイン -> 普通の依存関係
 dependencyResolutionManagement {
 
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  //repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
 
     google()
@@ -20,6 +35,10 @@ dependencyResolutionManagement {
 }
 
 
+
+//==========================================================================
+//プロジェクトの設定
+//==========================================================================
 
 
 rootProject.name = "build-logic"
@@ -39,6 +58,7 @@ include("node_setting")
 include("docker_setting")
 
 include("plantuml_setting")
+
 
 
 
