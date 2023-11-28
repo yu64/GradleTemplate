@@ -42,4 +42,5 @@ gretty {
 
     //Tomcat JNDI
     enableNaming = true;
+
 }

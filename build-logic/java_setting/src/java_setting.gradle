@@ -22,7 +22,7 @@ java {
 
     toolchain {
         //Javaのバージョンを指定
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 
 }

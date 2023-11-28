@@ -44,20 +44,14 @@ dependencyResolutionManagement {
 rootProject.name = "build-logic"
 
 //kotlin-dsl が jcenter に依存
-//include("other_setting")
+
+include("other_setting")
 
 include("eclipse_setting")
 include("java_setting")
-include("servlet_setting")
+include("tomcat9_setting")
+include("tomcat10_setting")
 
-include("conda_python_setting")
-include("global_python_setting")
-
-include("node_setting")
-
-include("docker_setting")
-
-include("plantuml_setting")
 
 
 

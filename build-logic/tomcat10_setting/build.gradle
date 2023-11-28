@@ -9,9 +9,8 @@ dependencies {
 
     //[Name]:[Name].gradle.plugin:[Version]
     
-    //Condaを自動的にインストールして、仮想環境でPythonを実行するプラグイン
-    implementation("com.pswidersk.python-plugin:com.pswidersk.python-plugin.gradle.plugin:2.2.0")
-
+    //JettyとTomcatを導入するプラグイン
+    implementation("org.gretty:org.gretty.gradle.plugin:4.0.3")
 }
 
 sourceSets {

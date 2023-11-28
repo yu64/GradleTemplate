@@ -1,9 +1,7 @@
 
 plugins {
     
-    //独自プラグイン
-    //基本
-    //id("view_setting")
+    //独自プラグイン (bulid-logic)
 
     //Java
     id("java_setting")
@@ -11,32 +9,17 @@ plugins {
     id("java_test_setting")
     id("jacoco_setting")
     id("javadoc_setting")
-    
+    id("jshell_setting")
+
     //Eclipse
     id("eclipse_setting")
     id("eclipse_buildship_setting")
     id("eclipse_annotation_setting")
 
-    //Servlet
-    //id("servlet_setting")
+    //Tomcat
+    id("tomcat10_setting")
 
-    //Conda Python
-    //id("conda_python_setting")
-
-    //Grobal Python
-    //id("global_python_setting")
-
-    //Node.js
-    //id("node_setting")
-
-    //Docker
-    //id("docker_setting")
-
-    //PlantUML
-    //id("plantuml_setting")
-
-    //fat-jar作成プラグイン
-    //id("com.github.johnrengelman.shadow") version "5.0.0" 
+ 
 
 }
 
