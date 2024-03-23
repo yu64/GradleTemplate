@@ -1,25 +1,27 @@
 
 plugins {
     
-    //独自プラグイン (bulid-logic)
+    //独自プラグイン (build-logic)
 
     //Java
-    id("java_setting")
-    id("java_app_setting")
-    id("java_test_setting")
-    id("jacoco_setting")
-    id("javadoc_setting")
-    id("jshell_setting")
+    // id("java_setting")
+    // id("java_app_setting")
+    // id("java_test_setting")
+    // id("jacoco_setting")
+    // id("javadoc_setting")
+    // id("jshell_setting")
 
     //Eclipse
-    id("eclipse_setting")
-    id("eclipse_buildship_setting")
-    id("eclipse_annotation_setting")
+    //id("eclipse_setting")
+    //id("eclipse_buildship_setting")
+    //id("eclipse_annotation_setting")
 
     //Tomcat
-    id("tomcat10_setting")
+    // id("tomcat10_setting")
 
- 
+    id("android_setting")
+
+    //id("com.android.application") version("7.3.1")
 
 }
 
@@ -28,6 +30,42 @@ plugins {
 dependencies {
 
     //implementation fileTree(dir: "lib", include: ["*"])
+
+    // implementation "androidx.appcompat:appcompat:1.6.1"
+    // implementation "com.google.android.material:material:1.11.0"
+    // implementation "androidx.navigation:navigation-ui:2.6.0"
+    // implementation "androidx.navigation:navigation-fragment:2.6.0"
+    // implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+    
 }
 
+
+// android {
+//     namespace 'com.example.myapplication'
+//     compileSdk 34
+
+//     defaultConfig {
+//         applicationId "com.example.myapplication"
+//         minSdk 29
+//         targetSdk 34
+//         versionCode 1
+//         versionName "1.0"
+
+//         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//     }
+
+//     buildTypes {
+//         release {
+//             minifyEnabled false
+//             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//         }
+//     }
+//     compileOptions {
+//         sourceCompatibility JavaVersion.VERSION_1_8
+//         targetCompatibility JavaVersion.VERSION_1_8
+//     }
+//     buildFeatures {
+//         viewBinding true
+//     }
+// }
 

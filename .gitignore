@@ -13,3 +13,7 @@ bin
 # Ignore Node.js
 package-lock.json
 node_modules
+
+# Ignore IDEA
+.idea
+local.properties

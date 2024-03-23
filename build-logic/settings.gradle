@@ -52,6 +52,7 @@ include("java_setting")
 include("tomcat9_setting")
 include("tomcat10_setting")
 
+include("android_setting")
 
 
 

@@ -1,0 +1,23 @@
+
+plugins {
+    
+    id("groovy-gradle-plugin")
+}
+
+
+dependencies {
+
+    //[Name]:[Name].gradle.plugin:[Version]
+
+    //Android開発プラグイン
+    implementation("com.android.application:com.android.application.gradle.plugin:7.3.1")
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs("src")
+        }
+    }
+
+}
