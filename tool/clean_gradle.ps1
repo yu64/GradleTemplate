@@ -17,9 +17,7 @@ try
         ".project"
         ".classpath"
         ".settings",
-        ".factorypath",
-        "node_modules",
-        "dist"
+        ".factorypath"
         )
 
     # 配下から対象を取得

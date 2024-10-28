@@ -2,6 +2,7 @@
 plugins {
 
     id("java-library")
+    id("application")
 }
 
 
@@ -22,17 +23,25 @@ java {
 
     toolchain {
         //Javaのバージョンを指定
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 
+}
+
+//アプリケーションの設定
+application {
+
+    //エントリーポイント
+    mainClass = this.ext.mainClassName;
 }
 
 //jarの設定
 jar {
     manifest {
-        attributes "Main-Class": this.ext.mainClassName
+        attributes "Main-Class": application.mainClass
     }
 }
+
 
 //タスクのうち指定のクラスに一致するものに対して処理を行う
 tasks.withType(JavaCompile) {

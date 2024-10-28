@@ -6,9 +6,10 @@ build
 
 # Ignore eclipse
 bin
+.settings
+.project
 .classpath
 .factorypath
-.settings
 
 # Ignore Node.js
 package-lock.json
@@ -17,3 +18,4 @@ node_modules
 # Ignore IDEA
 .idea
 local.properties
+

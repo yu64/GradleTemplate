@@ -1,47 +1,37 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    
     "terminal.integrated.env.windows": {
       "PSExecutionPolicyPreference": "RemoteSigned"
     },
+    
     "files.exclude": {
+
+        //基本
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
 
         //Git
         "**/.gitattributes": true,
-        "**/.gitignore": true,
-        "**/.gitmodules": true,
-
-        //buildSrc
-        "buildSrc/gradlew.bat": true,
-        "buildSrc/README.*": true,
-        "buildSrc/settings.gradle": true,
-        "buildSrc/build": true,
-
-        //build-logic
-        "build-logic/**/build": true,
-
-        //Eclipse
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true,
-        ".eclipse_sample": true,
-        "**/bin": true,
 
         //Gradle
-        "**/gradlew": true,
-        "**/gradle": true,
+        "**/build": true,
         "**/.gradle": true,
-        "**/sample.gradle": true,
+        "**/gradle": true,
+        "**/gradle/wrapper": true,
+        "**/gradlew": true,
+        "**/gradlew.bat": true,
 
-        //Node.js
-        "node_modules": true,
-        "package-lock.json": true,
-
-        //Other
-        "**/LICENSE": true,
-
-
-      },
-      "java.compile.nullAnalysis.mode": "disabled",
-      "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable",
+        //Eclipse
+        "**/bin": true,
+        "**/.settings": true,
+        "**/.project": true,
+        "**/.classpath": true,
+        "**/.factorypath": true,
+    },
 }
