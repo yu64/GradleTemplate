@@ -44,5 +44,5 @@ dependencyResolutionManagement {
 //==========================================================================
 
 
-rootProject.name = 'SampleMemoApp'
+rootProject.name = 'GradleTemplate'
 include('app')
