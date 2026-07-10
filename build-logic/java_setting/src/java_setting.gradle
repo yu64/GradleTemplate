@@ -55,7 +55,7 @@ tasks.withType(JavaCompile) {
 plugins.withId("java") {
     tasks.register("printClasspath") {
         doLast {
-            // extensions から安全に取得
+            // extensions から取得
             extensions.getByType(SourceSetContainer).each { srcSet ->
                 println("=====")
                 println("# SourceSet: ${srcSet.name}")
