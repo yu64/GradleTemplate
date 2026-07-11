@@ -1,4 +1,5 @@
 [versions]
+java = "25"
 quarkus-plugin = "3.37.2"
 quarkus-platform = "3.37.2"
 
