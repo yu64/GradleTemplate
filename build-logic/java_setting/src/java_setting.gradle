@@ -2,20 +2,12 @@
 plugins {
 
     id("java-library")
-    id("application")
 }
 
 
 //==========================================================================
 //Javaの設定
 //==========================================================================
-
-
-ext {
-
-    topPackage = "app"
-    mainClassName = "${topPackage}.Main"
-}
 
 
 //javaの設定
@@ -28,24 +20,15 @@ java {
 
 }
 
-//アプリケーションの設定
-application {
-
-    //エントリーポイント
-    mainClass = this.ext.mainClassName;
-}
-
-//jarの設定
-jar {
-    manifest {
-        attributes "Main-Class": application.mainClass
-    }
-}
-
-
 //タスクのうち指定のクラスに一致するものに対して処理を行う
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
+}
+
+// Java実行時の標準出力・標準エラーを UTF-8 に揃える
+tasks.withType(JavaExec).configureEach {
+    systemProperty "stdout.encoding", "UTF-8"
+    systemProperty "stderr.encoding", "UTF-8"
 }
 
 

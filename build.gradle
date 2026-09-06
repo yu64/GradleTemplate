@@ -1,7 +1,7 @@
 
 plugins {
 
-    id("java_setting")
+    id("java_app_setting")
     id("java_test_setting")
 
     id("eclipse_setting")
@@ -17,7 +17,7 @@ dependencies {
     //implementation "group:name:version"
 
     // Java Annotation Processor Template
-    // - annotation subproject: java-library
+    // - annotation subproject: java_setting
     // - processor subproject: java_apt_setting
     //compileOnly project(':<annotation subproject>')
     //annotationProcessor project(':<processor subproject>')

@@ -1,20 +1,10 @@
 plugins {
-    id("java-library")
+    id("java_setting")
 }
 
 //==========================================================================
 //アノテーションプロセッサの開発設定
 //==========================================================================
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(libs.versions.java.get() as Integer)
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = "UTF-8"
-}
 
 dependencies {
     // @AutoServiceによるプロセッサのサービス登録
