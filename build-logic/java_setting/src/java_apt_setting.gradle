@@ -30,4 +30,11 @@ dependencies {
 
 tasks.named("test") {
     useJUnitPlatform()
+
+    // compile-testing 0.21.0の生成ソース比較が使用するjavac内部API
+    jvmArgs(
+        '--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED',
+        '--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED',
+        '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED'
+    )
 }

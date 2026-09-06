@@ -16,4 +16,10 @@ dependencies {
     //implementation fileTree(dir: "lib", include: ["*"])
     //implementation "group:name:version"
 
+    // Java Annotation Processor Template
+    // - annotation subproject: java-library
+    // - processor subproject: java_apt_setting
+    //compileOnly project(':<annotation subproject>')
+    //annotationProcessor project(':<processor subproject>')
+
 }
