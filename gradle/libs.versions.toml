@@ -1,9 +1,18 @@
 [versions]
 java = "25"
+auto-service = "1.1.1"
+compile-testing = "0.21.0"
+junit = "5.10.2"
 quarkus-plugin = "3.37.2"
 quarkus-platform = "3.37.2"
 
 [libraries]
+auto-service-annotations = { group = "com.google.auto.service", name = "auto-service-annotations", version.ref = "auto-service" }
+auto-service-processor = { group = "com.google.auto.service", name = "auto-service", version.ref = "auto-service" }
+compile-testing = { group = "com.google.testing.compile", name = "compile-testing", version.ref = "compile-testing" }
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
 quarkus-bom = { group = "io.quarkus.platform", name = "quarkus-bom", version.ref = "quarkus-platform" }
 
 [plugins]

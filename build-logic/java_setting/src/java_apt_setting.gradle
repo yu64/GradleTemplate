@@ -1,0 +1,33 @@
+plugins {
+    id("java-library")
+}
+
+//==========================================================================
+//アノテーションプロセッサの開発設定
+//==========================================================================
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(libs.versions.java.get() as Integer)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    // @AutoServiceによるプロセッサのサービス登録
+    compileOnly libs.auto.service.annotations
+    annotationProcessor libs.auto.service.processor
+
+    // コンパイル結果・生成コードを検証するテスト環境
+    testImplementation libs.compile.testing
+    testImplementation platform(libs.junit.bom)
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly libs.junit.platform.launcher
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
