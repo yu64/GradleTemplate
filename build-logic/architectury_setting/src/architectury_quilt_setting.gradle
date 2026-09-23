@@ -1,0 +1,31 @@
+//Loomの適用前にローダーを選択する
+extensions.extraProperties.set("loom.platform", "quilt")
+pluginManager.apply("architectury_loader_setting")
+
+
+//==========================================================================
+//Quilt Projectの設定
+//==========================================================================
+
+def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
+architectury {
+    platformSetupLoomIde()
+    loader("quilt")
+}
+
+configurations.named("developmentQuilt") {
+    extendsFrom(configurations.common)
+}
+
+def commonPath = providers.gradleProperty("architectury_common_project").getOrElse(":common")
+dependencies {
+    modImplementation(catalog.findLibrary("quilt-loader").get())
+    modImplementation(catalog.findLibrary("quilt-fabric-api").get())
+    modImplementation(catalog.findLibrary("quilt-qsl").get())
+    modImplementation(catalog.findLibrary("architectury-api-fabric").get()) {
+        //Quilt側のLoaderとAPIを使用する
+        exclude([group: "net.fabricmc"])
+        exclude([group: "net.fabricmc.fabric-api"])
+    }
+    shadowBundle(project([path: commonPath, configuration: "transformProductionQuilt"]))
+}

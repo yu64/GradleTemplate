@@ -33,10 +33,15 @@ dependencyResolutionManagement {
 
   }
 
-  // 親プロジェクトの Version Catalog を参照
+  //親プロジェクトのカタログを検出し、libs以外はファイル名 + Libsで登録する
   versionCatalogs {
-    libs {
-      from(files("../gradle/libs.versions.toml"))
+    file("../gradle").listFiles()?.sort { it.name }?.each { catalogFile ->
+      if(!catalogFile.isFile()) return;
+      if(!catalogFile.name.endsWith(".versions.toml")) return;
+      def catalogName = catalogFile.name - ".versions.toml"
+      create(catalogName == "libs" ? "libs" : catalogName + "Libs") {
+        from(files(catalogFile))
+      }
     }
   }
 }

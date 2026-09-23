@@ -1,0 +1,25 @@
+//Loomの適用前にローダーを選択する
+extensions.extraProperties.set("loom.platform", "neoforge")
+pluginManager.apply("architectury_loader_setting")
+
+
+//==========================================================================
+//NeoForge Projectの設定
+//==========================================================================
+
+def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
+architectury {
+    platformSetupLoomIde()
+    neoForge()
+}
+
+configurations.named("developmentNeoForge") {
+    extendsFrom(configurations.common)
+}
+
+def commonPath = providers.gradleProperty("architectury_common_project").getOrElse(":common")
+dependencies {
+    neoForge(catalog.findLibrary("neoforge").get())
+    modImplementation(catalog.findLibrary("architectury-api-neoforge").get())
+    shadowBundle(project([path: commonPath, configuration: "transformProductionNeoForge"]))
+}

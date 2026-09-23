@@ -1,0 +1,12 @@
+plugins {
+    id("architectury-plugin")
+}
+
+//==========================================================================
+//ルートの評価中にArchitecturyを初期化する（サブプロジェクトからの適用では遅い）。
+//==========================================================================
+
+def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
+architectury {
+    minecraft = catalog.findVersion("minecraft").get().requiredVersion
+}

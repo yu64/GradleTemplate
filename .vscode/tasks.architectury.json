@@ -1,0 +1,233 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Architectury: fabric Client",
+            "type": "shell",
+            "command": "./gradlew",
+            "windows": {
+                "command": ".\\gradlew.bat"
+            },
+            "args": [
+                ":fabric:runClient",
+                "--debug-jvm",
+                "--console=plain",
+                "--no-daemon"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "owner": "architectury",
+                    "pattern": {
+                        "regexp": "^(?!)()$",
+                        "message": 1,
+                        "file": 1
+                    },
+                    "background": {
+                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "Architectury: fabric Server",
+            "type": "shell",
+            "command": "./gradlew",
+            "windows": {
+                "command": ".\\gradlew.bat"
+            },
+            "args": [
+                ":fabric:runServer",
+                "--debug-jvm",
+                "--console=plain",
+                "--no-daemon"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "owner": "architectury",
+                    "pattern": {
+                        "regexp": "^(?!)()$",
+                        "message": 1,
+                        "file": 1
+                    },
+                    "background": {
+                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "Architectury: neoforge Client",
+            "type": "shell",
+            "command": "./gradlew",
+            "windows": {
+                "command": ".\\gradlew.bat"
+            },
+            "args": [
+                ":neoforge:runClient",
+                "--debug-jvm",
+                "--console=plain",
+                "--no-daemon"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "owner": "architectury",
+                    "pattern": {
+                        "regexp": "^(?!)()$",
+                        "message": 1,
+                        "file": 1
+                    },
+                    "background": {
+                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "Architectury: neoforge Server",
+            "type": "shell",
+            "command": "./gradlew",
+            "windows": {
+                "command": ".\\gradlew.bat"
+            },
+            "args": [
+                ":neoforge:runServer",
+                "--debug-jvm",
+                "--console=plain",
+                "--no-daemon"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "owner": "architectury",
+                    "pattern": {
+                        "regexp": "^(?!)()$",
+                        "message": 1,
+                        "file": 1
+                    },
+                    "background": {
+                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "Architectury: quilt Client",
+            "type": "shell",
+            "command": "./gradlew",
+            "windows": {
+                "command": ".\\gradlew.bat"
+            },
+            "args": [
+                ":quilt:runClient",
+                "--debug-jvm",
+                "--console=plain",
+                "--no-daemon"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "owner": "architectury",
+                    "pattern": {
+                        "regexp": "^(?!)()$",
+                        "message": 1,
+                        "file": 1
+                    },
+                    "background": {
+                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "Architectury: quilt Server",
+            "type": "shell",
+            "command": "./gradlew",
+            "windows": {
+                "command": ".\\gradlew.bat"
+            },
+            "args": [
+                ":quilt:runServer",
+                "--debug-jvm",
+                "--console=plain",
+                "--no-daemon"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "owner": "architectury",
+                    "pattern": {
+                        "regexp": "^(?!)()$",
+                        "message": 1,
+                        "file": 1
+                    },
+                    "background": {
+                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        }
+    ]
+}

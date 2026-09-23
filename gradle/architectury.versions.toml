@@ -1,0 +1,27 @@
+[versions]
+minecraft = "1.21.1"
+minecraft-java = "21"
+architectury-plugin = "3.5.170"
+architectury-loom = "1.14.476"
+architectury-api = "13.0.11"
+shadow-plugin = "9.2.2"
+fabric-loader = "0.16.7"
+fabric-api = "0.116.6+1.21.1"
+neoforge = "21.1.219"
+quilt-loader = "0.27.0-beta.1"
+quilt-fabric-api = "11.0.0-alpha.3+0.100.7-1.21"
+quilt-qsl = "10.0.0-alpha.3+1.21.1"
+
+[libraries]
+architectury-plugin = { module = "architectury-plugin:architectury-plugin.gradle.plugin", version.ref = "architectury-plugin" }
+architectury-loom = { module = "dev.architectury.loom:dev.architectury.loom.gradle.plugin", version.ref = "architectury-loom" }
+shadow-plugin = { module = "com.gradleup.shadow:shadow-gradle-plugin", version.ref = "shadow-plugin" }
+architectury-api-common = { module = "dev.architectury:architectury", version.ref = "architectury-api" }
+architectury-api-fabric = { module = "dev.architectury:architectury-fabric", version.ref = "architectury-api" }
+architectury-api-neoforge = { module = "dev.architectury:architectury-neoforge", version.ref = "architectury-api" }
+fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
+fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
+neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
+quilt-loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt-loader" }
+quilt-fabric-api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilt-fabric-api" }
+quilt-qsl = { module = "org.quiltmc:qsl", version.ref = "quilt-qsl" }

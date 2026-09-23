@@ -1,0 +1,26 @@
+//Loomの適用前にローダーを選択する
+extensions.extraProperties.set("loom.platform", "fabric")
+pluginManager.apply("architectury_loader_setting")
+
+
+//==========================================================================
+//Fabric Projectの設定
+//==========================================================================
+
+def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+configurations.named("developmentFabric") {
+    extendsFrom(configurations.common)
+}
+
+def commonPath = providers.gradleProperty("architectury_common_project").getOrElse(":common")
+dependencies {
+    modImplementation(catalog.findLibrary("fabric-loader").get())
+    modImplementation(catalog.findLibrary("fabric-api").get())
+    modImplementation(catalog.findLibrary("architectury-api-fabric").get())
+    shadowBundle(project([path: commonPath, configuration: "transformProductionFabric"]))
+}
