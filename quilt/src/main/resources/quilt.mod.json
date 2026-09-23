@@ -1,0 +1,25 @@
+{
+    "schema_version": 1,
+    "quilt_loader": {
+        "group": "${group}",
+        "id": "template_sample",
+        "version": "${version}",
+        "metadata": {
+            "name": "Architectury Sample",
+            "description": "Registers the /templatehello command.",
+            "license": "MIT"
+        },
+        "intermediate_mappings": "net.fabricmc:intermediary",
+        "entrypoints": {
+            "init": ["com.example.templatesample.quilt.TemplateSampleQuilt"]
+        },
+        "depends": [
+            { "id": "quilt_loader", "versions": ">=0.27.0-beta.1" },
+            { "id": "quilt_base", "versions": "*" },
+            { "id": "minecraft", "versions": "1.21.1" },
+            { "id": "java", "versions": ">=21" },
+            { "id": "architectury", "versions": ">=13.0.11" },
+            { "id": "quilted_fabric_api", "versions": "*" }
+        ]
+    }
+}

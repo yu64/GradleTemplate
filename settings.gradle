@@ -6,11 +6,11 @@
 //プラグインの依存関係を解決するリポジトリ
 pluginManagement {
     
-    //Architectury環境を使用する場合に有効化する
-    //apply([
-    //    from: "build-logic/architectury_setting/part/plugin_repo_settings.gradle",
-    //    to: settings
-    //])
+    //Architecturyプラグインの取得先
+    apply([
+        from: "build-logic/architectury_setting/part/plugin_repo_settings.gradle",
+        to: settings
+    ])
 
     repositories {
         
@@ -41,10 +41,8 @@ dependencyResolutionManagement {
         mavenLocal()
     }
 
-    //子プロジェクトでの指定を禁止
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    //Architectury環境では上の行を次の設定に置き換える
-    //repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    //ArchitecturyとLoomによるプロジェクト側のリポジトリ登録を許可する
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
 
     //カタログファイルを自動検出してマッピング
     //libs.versions.tomlはデフォルトで読み込まれるので除外。
@@ -68,5 +66,5 @@ dependencyResolutionManagement {
 //==========================================================================
 
 
-rootProject.name = 'GradleTemplate'
-// include('subproject')
+rootProject.name = "ArchitecturySample"
+include("common", "fabric", "neoforge", "quilt")

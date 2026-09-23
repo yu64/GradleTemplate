@@ -1,0 +1,19 @@
+{
+    "schemaVersion": 1,
+    "id": "template_sample",
+    "version": "${version}",
+    "name": "Architectury Sample",
+    "description": "Registers the /templatehello command.",
+    "license": "MIT",
+    "environment": "*",
+    "entrypoints": {
+        "main": ["com.example.templatesample.fabric.TemplateSampleFabric"]
+    },
+    "depends": {
+        "fabricloader": ">=0.16.7",
+        "minecraft": "1.21.1",
+        "java": ">=21",
+        "architectury": ">=13.0.11",
+        "fabric-api": "*"
+    }
+}

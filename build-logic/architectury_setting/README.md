@@ -41,6 +41,6 @@ architectury_common_project=:common
 ## VS Code
 
 `.vscode/launch.architectury.json` と `tasks.architectury.json` は実行構成のひな形です。
-利用時にそれぞれ `launch.json` のconfigurationsと `tasks.json` のtasksへ取り込みます（専用構成ならファイルをコピー）。Javaデバッガー拡張が必要です。
-プロジェクト名を変更した場合はtasks内の `:fabric:runClient` などのパスを変更し、不要なローダーの項目は省いてください。
+利用時にそれぞれ `launch.json` のconfigurationsと `tasks.json` のtasksへ取り込みます（専用構成ならファイルをコピー）。JavaデバッガーとGradle for Java拡張が必要です。
+tasks内のrootProjectをルート名に合わせ、サブプロジェクト名を変更した場合はid・script・project・buildFileも変更してください。不要なローダーの項目は省けます。
 Client / Serverを選ぶとGradleが起動し、ポート5005でデバッガーを接続します。同時起動はせず、切断後にゲームが残る場合はタスクも終了してください。
