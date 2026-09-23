@@ -19,3 +19,6 @@ node_modules
 .idea
 local.properties
 
+# Minecraft開発実行データとローカルキャッシュ
+**/run/
+.local/

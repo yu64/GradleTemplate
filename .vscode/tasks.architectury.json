@@ -2,232 +2,196 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "type": "gradle",
             "label": "Architectury: fabric Client",
-            "type": "shell",
-            "command": "./gradlew",
-            "windows": {
-                "command": ".\\gradlew.bat"
-            },
-            "args": [
-                ":fabric:runClient",
-                "--debug-jvm",
-                "--console=plain",
-                "--no-daemon"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "isBackground": true,
-            "problemMatcher": [
-                {
-                    "owner": "architectury",
-                    "pattern": {
-                        "regexp": "^(?!)()$",
-                        "message": 1,
-                        "file": 1
-                    },
-                    "background": {
-                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
-                        "activeOnStart": true,
-                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+            "id": "fabric:runClient",
+            "description": "Run Minecraft (debug mode)",
+            "script": "fabric:runClient",
+            "group": "loom",
+            "project": "fabric",
+            "buildFile": "${workspaceFolder}/fabric/build.gradle",
+            "rootProject": "GradleTemplate",
+            "projectFolder": "${workspaceFolder}",
+            "workspaceFolder": "${workspaceFolder}",
+            "args": "--debug-jvm --console=plain",
+            "javaDebug": false,
+            "problemMatcher": {
+                "base": "$gradle",
+                "pattern": [
+                    {
+                        "regexp": "\\b\\B",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
                     }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "^.*Listening for transport dt_socket at address.*"
                 }
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true
-            }
+            },
+            "isBackground": true
         },
         {
+            "type": "gradle",
             "label": "Architectury: fabric Server",
-            "type": "shell",
-            "command": "./gradlew",
-            "windows": {
-                "command": ".\\gradlew.bat"
-            },
-            "args": [
-                ":fabric:runServer",
-                "--debug-jvm",
-                "--console=plain",
-                "--no-daemon"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "isBackground": true,
-            "problemMatcher": [
-                {
-                    "owner": "architectury",
-                    "pattern": {
-                        "regexp": "^(?!)()$",
-                        "message": 1,
-                        "file": 1
-                    },
-                    "background": {
-                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
-                        "activeOnStart": true,
-                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+            "id": "fabric:runServer",
+            "description": "Run Minecraft (debug mode)",
+            "script": "fabric:runServer",
+            "group": "loom",
+            "project": "fabric",
+            "buildFile": "${workspaceFolder}/fabric/build.gradle",
+            "rootProject": "GradleTemplate",
+            "projectFolder": "${workspaceFolder}",
+            "workspaceFolder": "${workspaceFolder}",
+            "args": "--debug-jvm --console=plain",
+            "javaDebug": false,
+            "problemMatcher": {
+                "base": "$gradle",
+                "pattern": [
+                    {
+                        "regexp": "\\b\\B",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
                     }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "^.*Listening for transport dt_socket at address.*"
                 }
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true
-            }
+            },
+            "isBackground": true
         },
         {
+            "type": "gradle",
             "label": "Architectury: neoforge Client",
-            "type": "shell",
-            "command": "./gradlew",
-            "windows": {
-                "command": ".\\gradlew.bat"
-            },
-            "args": [
-                ":neoforge:runClient",
-                "--debug-jvm",
-                "--console=plain",
-                "--no-daemon"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "isBackground": true,
-            "problemMatcher": [
-                {
-                    "owner": "architectury",
-                    "pattern": {
-                        "regexp": "^(?!)()$",
-                        "message": 1,
-                        "file": 1
-                    },
-                    "background": {
-                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
-                        "activeOnStart": true,
-                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+            "id": "neoforge:runClient",
+            "description": "Run Minecraft (debug mode)",
+            "script": "neoforge:runClient",
+            "group": "loom",
+            "project": "neoforge",
+            "buildFile": "${workspaceFolder}/neoforge/build.gradle",
+            "rootProject": "GradleTemplate",
+            "projectFolder": "${workspaceFolder}",
+            "workspaceFolder": "${workspaceFolder}",
+            "args": "--debug-jvm --console=plain",
+            "javaDebug": false,
+            "problemMatcher": {
+                "base": "$gradle",
+                "pattern": [
+                    {
+                        "regexp": "\\b\\B",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
                     }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "^.*Listening for transport dt_socket at address.*"
                 }
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true
-            }
+            },
+            "isBackground": true
         },
         {
+            "type": "gradle",
             "label": "Architectury: neoforge Server",
-            "type": "shell",
-            "command": "./gradlew",
-            "windows": {
-                "command": ".\\gradlew.bat"
-            },
-            "args": [
-                ":neoforge:runServer",
-                "--debug-jvm",
-                "--console=plain",
-                "--no-daemon"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "isBackground": true,
-            "problemMatcher": [
-                {
-                    "owner": "architectury",
-                    "pattern": {
-                        "regexp": "^(?!)()$",
-                        "message": 1,
-                        "file": 1
-                    },
-                    "background": {
-                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
-                        "activeOnStart": true,
-                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+            "id": "neoforge:runServer",
+            "description": "Run Minecraft (debug mode)",
+            "script": "neoforge:runServer",
+            "group": "loom",
+            "project": "neoforge",
+            "buildFile": "${workspaceFolder}/neoforge/build.gradle",
+            "rootProject": "GradleTemplate",
+            "projectFolder": "${workspaceFolder}",
+            "workspaceFolder": "${workspaceFolder}",
+            "args": "--debug-jvm --console=plain",
+            "javaDebug": false,
+            "problemMatcher": {
+                "base": "$gradle",
+                "pattern": [
+                    {
+                        "regexp": "\\b\\B",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
                     }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "^.*Listening for transport dt_socket at address.*"
                 }
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true
-            }
+            },
+            "isBackground": true
         },
         {
+            "type": "gradle",
             "label": "Architectury: quilt Client",
-            "type": "shell",
-            "command": "./gradlew",
-            "windows": {
-                "command": ".\\gradlew.bat"
-            },
-            "args": [
-                ":quilt:runClient",
-                "--debug-jvm",
-                "--console=plain",
-                "--no-daemon"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "isBackground": true,
-            "problemMatcher": [
-                {
-                    "owner": "architectury",
-                    "pattern": {
-                        "regexp": "^(?!)()$",
-                        "message": 1,
-                        "file": 1
-                    },
-                    "background": {
-                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
-                        "activeOnStart": true,
-                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+            "id": "quilt:runClient",
+            "description": "Run Minecraft (debug mode)",
+            "script": "quilt:runClient",
+            "group": "loom",
+            "project": "quilt",
+            "buildFile": "${workspaceFolder}/quilt/build.gradle",
+            "rootProject": "GradleTemplate",
+            "projectFolder": "${workspaceFolder}",
+            "workspaceFolder": "${workspaceFolder}",
+            "args": "--debug-jvm --console=plain",
+            "javaDebug": false,
+            "problemMatcher": {
+                "base": "$gradle",
+                "pattern": [
+                    {
+                        "regexp": "\\b\\B",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
                     }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "^.*Listening for transport dt_socket at address.*"
                 }
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true
-            }
+            },
+            "isBackground": true
         },
         {
+            "type": "gradle",
             "label": "Architectury: quilt Server",
-            "type": "shell",
-            "command": "./gradlew",
-            "windows": {
-                "command": ".\\gradlew.bat"
-            },
-            "args": [
-                ":quilt:runServer",
-                "--debug-jvm",
-                "--console=plain",
-                "--no-daemon"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "isBackground": true,
-            "problemMatcher": [
-                {
-                    "owner": "architectury",
-                    "pattern": {
-                        "regexp": "^(?!)()$",
-                        "message": 1,
-                        "file": 1
-                    },
-                    "background": {
-                        "endsPattern": "^.*Listening for transport dt_socket at address: 5005.*$",
-                        "activeOnStart": true,
-                        "beginsPattern": "^.*\u003e Task .*:run(Client|Server).*$"
+            "id": "quilt:runServer",
+            "description": "Run Minecraft (debug mode)",
+            "script": "quilt:runServer",
+            "group": "loom",
+            "project": "quilt",
+            "buildFile": "${workspaceFolder}/quilt/build.gradle",
+            "rootProject": "GradleTemplate",
+            "projectFolder": "${workspaceFolder}",
+            "workspaceFolder": "${workspaceFolder}",
+            "args": "--debug-jvm --console=plain",
+            "javaDebug": false,
+            "problemMatcher": {
+                "base": "$gradle",
+                "pattern": [
+                    {
+                        "regexp": "\\b\\B",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
                     }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "^.*Listening for transport dt_socket at address.*"
                 }
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true
-            }
+            },
+            "isBackground": true
         }
     ]
 }
