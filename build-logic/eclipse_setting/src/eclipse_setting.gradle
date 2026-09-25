@@ -2,7 +2,7 @@
 
 plugins {
 
-    id("eclipse")
+  id("eclipse")
 }
 
 //==========================================================================
@@ -12,9 +12,9 @@ plugins {
 
 eclipse {
 
-    classpath {
+  classpath {
 
-        downloadJavadoc = true
-        downloadSources = true
-    }
+    downloadJavadoc = true
+    downloadSources = true
+  }
 }

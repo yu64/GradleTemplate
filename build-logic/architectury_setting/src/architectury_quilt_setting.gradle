@@ -9,23 +9,23 @@ pluginManager.apply("architectury_loader_setting")
 
 def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
 architectury {
-    platformSetupLoomIde()
-    loader("quilt")
+  platformSetupLoomIde()
+  loader("quilt")
 }
 
 configurations.named("developmentQuilt") {
-    extendsFrom(configurations.common)
+  extendsFrom(configurations.common)
 }
 
 def commonPath = providers.gradleProperty("architectury_common_project").getOrElse(":common")
 dependencies {
-    modImplementation(catalog.findLibrary("quilt-loader").get())
-    modImplementation(catalog.findLibrary("quilt-fabric-api").get())
-    modImplementation(catalog.findLibrary("quilt-qsl").get())
-    modImplementation(catalog.findLibrary("architectury-api-fabric").get()) {
-        //Quilt側のLoaderとAPIを使用する
-        exclude([group: "net.fabricmc"])
-        exclude([group: "net.fabricmc.fabric-api"])
-    }
-    shadowBundle(project([path: commonPath, configuration: "transformProductionQuilt"]))
+  modImplementation(catalog.findLibrary("quilt-loader").get())
+  modImplementation(catalog.findLibrary("quilt-fabric-api").get())
+  modImplementation(catalog.findLibrary("quilt-qsl").get())
+  modImplementation(catalog.findLibrary("architectury-api-fabric").get()) {
+    //Quilt側のLoaderとAPIを使用する
+    exclude([group: "net.fabricmc"])
+    exclude([group: "net.fabricmc.fabric-api"])
+  }
+  shadowBundle(project([path: commonPath, configuration: "transformProductionQuilt"]))
 }

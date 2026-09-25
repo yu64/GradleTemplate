@@ -1,7 +1,7 @@
 
 plugins {
 
-    id("java-library")
+  id("java-library")
 }
 
 
@@ -13,47 +13,47 @@ plugins {
 //javaの設定
 java {
 
-    toolchain {
-        //Javaのバージョンを指定
-        languageVersion = JavaLanguageVersion.of(libs.versions.java.get() as Integer)
-    }
+  toolchain {
+    //Javaのバージョンを指定
+    languageVersion = JavaLanguageVersion.of(libs.versions.java.get() as Integer)
+  }
 
 }
 
 //タスクのうち指定のクラスに一致するものに対して処理を行う
 tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
+  options.encoding = "UTF-8"
 }
 
 // Java実行時の標準出力・標準エラーを UTF-8 に揃える
 tasks.withType(JavaExec).configureEach {
-    systemProperty "stdout.encoding", "UTF-8"
-    systemProperty "stderr.encoding", "UTF-8"
+  systemProperty "stdout.encoding", "UTF-8"
+  systemProperty "stderr.encoding", "UTF-8"
 }
 
 
 // クラスパスの内容を表示するタスク
 // Java プラグインが適用されたらタスクを登録する
 plugins.withId("java") {
-    tasks.register("printClasspath") {
-        doLast {
-            // extensions から取得
-            extensions.getByType(SourceSetContainer).each { srcSet ->
-                println("=====")
-                println("# SourceSet: ${srcSet.name}")
+  tasks.register("printClasspath") {
+    doLast {
+      // extensions から取得
+      extensions.getByType(SourceSetContainer).each { srcSet ->
+        println("=====")
+        println("# SourceSet: ${srcSet.name}")
 
-                println("-----")
-                println("## compileClasspath")
-                srcSet.compileClasspath.forEach { println "  ${it}" }
-                
-                println("-----")
-                println("## annotationProcessorPath")
-                srcSet.annotationProcessorPath.forEach { println "  ${it}" }
-                
-                println("-----")
-                println("## runtimeClasspath")
-                srcSet.runtimeClasspath.forEach { println "  ${it}" }
-            }
-        }
+        println("-----")
+        println("## compileClasspath")
+        srcSet.compileClasspath.forEach { println "  ${it}" }
+
+        println("-----")
+        println("## annotationProcessorPath")
+        srcSet.annotationProcessorPath.forEach { println "  ${it}" }
+
+        println("-----")
+        println("## runtimeClasspath")
+        srcSet.runtimeClasspath.forEach { println "  ${it}" }
+      }
     }
+  }
 }

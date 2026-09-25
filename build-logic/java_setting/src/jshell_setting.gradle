@@ -12,189 +12,189 @@ plugins {
 //==========================================================================
 
 tasks.register("jshell", Exec) {
-    group = 'application'
-    description = 'jshellを実行します。Gradleの依存関係を含みます。'
+  group = 'application'
+  description = 'jshellを実行します。Gradleの依存関係を含みます。'
 
-    dependsOn "classes"
+  dependsOn "classes"
 
-    doFirst {
-        standardInput = System.in
-        executable = "jshell"
-        args(getShellArgs(false))
-    }
+  doFirst {
+    standardInput = System.in
+    executable = "jshell"
+    args(getShellArgs(false))
+  }
 }
 
 tasks.register("testJshell", Exec) {
-    group = 'application'
-    description = 'jshellを実行します。Gradleのテスト環境の依存関係を含みます。'
+  group = 'application'
+  description = 'jshellを実行します。Gradleのテスト環境の依存関係を含みます。'
 
-    dependsOn "testClasses"
+  dependsOn "testClasses"
 
-    doFirst {
-        standardInput = System.in
-        executable = "jshell"
-        args(getShellArgs(true))
-    }
+  doFirst {
+    standardInput = System.in
+    executable = "jshell"
+    args(getShellArgs(true))
+  }
 }
 
 def getShellArgs(boolean isTest) {
-    // 実行環境のクラスパスを取得
-    def pathSet = getClassPathSet(isTest)
-    def path = pathSet.join(System.getProperty("path.separator"))
-    this.logger.info(":jshell executing with --class-path {}", path)
+  // 実行環境のクラスパスを取得
+  def pathSet = getClassPathSet(isTest)
+  def path = pathSet.join(System.getProperty("path.separator"))
+  this.logger.info(":jshell executing with --class-path {}", path)
 
-    // クラスパスの指定部分
-    def shellArgs = [
-        "--class-path", path,
-        "--startup", "DEFAULT",
-        "--startup", "PRINTING"
-    ]
+  // クラスパスの指定部分
+  def shellArgs = [
+    "--class-path", path,
+    "--startup", "DEFAULT",
+    "--startup", "PRINTING"
+  ]
 
-    // startupの指定が空白の場合は、スキップ
-    if(project.findProperty("jshell.startup") == "") {
-        this.logger.info ':jshell "jshell.startup" set to empty string, skipping "startup.jsh" execution'
-        return shellArgs
-    }
+  // startupの指定が空白の場合は、スキップ
+  if(project.findProperty("jshell.startup") == "") {
+    this.logger.info ':jshell "jshell.startup" set to empty string, skipping "startup.jsh" execution'
+    return shellArgs
+  }
 
-    // startupの指定がある場合は、引数に追加
-    if(project.findProperty("jshell.startup")) {
-        def jshellStartup = project.findProperty("jshell.startup")
+  // startupの指定がある場合は、引数に追加
+  if(project.findProperty("jshell.startup")) {
+    def jshellStartup = project.findProperty("jshell.startup")
 
-        this.logger.info(
-            ":jshell executing with --startup DEFAULT --startup PRINTING --startup \"{}\"", 
-            jshellStartup
-        )
-
-        shellArgs += ["--startup", jshellStartup]
-        return shellArgs
-    }
-
-    // 未指定の場合、プロジェクトルートから見つける
-    def startupJsh = layout.projectDirectory.file("startup.jsh").asFile
-
-    // 存在しない場合は、スキップ
-    if(!startupJsh.exists()) {
-        this.logger.info(
-            ":jshell did not find a startup.jsh script at the project dir nor a `jshell.startup` configuration"
-        )
-        return shellArgs
-    }
-
-    // 存在する場合は、引数に追加
-    def startupJshPath = startupJsh.absolutePath
     this.logger.info(
-        ":jshell executing with --startup DEFAULT --startup PRINTING --startup \"{}\"", 
-        startupJshPath
+      ":jshell executing with --startup DEFAULT --startup PRINTING --startup \"{}\"",
+      jshellStartup
     )
 
-    shellArgs += ["--startup", startupJshPath]
+    shellArgs += ["--startup", jshellStartup]
     return shellArgs
+  }
+
+  // 未指定の場合、プロジェクトルートから見つける
+  def startupJsh = layout.projectDirectory.file("startup.jsh").asFile
+
+  // 存在しない場合は、スキップ
+  if(!startupJsh.exists()) {
+    this.logger.info(
+      ":jshell did not find a startup.jsh script at the project dir nor a `jshell.startup` configuration"
+    )
+    return shellArgs
+  }
+
+  // 存在する場合は、引数に追加
+  def startupJshPath = startupJsh.absolutePath
+  this.logger.info(
+    ":jshell executing with --startup DEFAULT --startup PRINTING --startup \"{}\"",
+    startupJshPath
+  )
+
+  shellArgs += ["--startup", startupJshPath]
+  return shellArgs
 }
 
 def getClassPathSet(boolean isTest) {
-    Set pathSet = []
+  Set pathSet = []
 
-    def sourceSetContainer = extensions.findByType(SourceSetContainer)
-    def targetSrc = null
-    def compile = null
-    def runtime = null
+  def sourceSetContainer = extensions.findByType(SourceSetContainer)
+  def targetSrc = null
+  def compile = null
+  def runtime = null
 
-    if(sourceSetContainer != null) {
-        if(isTest) {
-            project.tasks.withType(Test).configureEach {
-                pathSet.addAll(classpath.findAll { it.exists() })
-            }
+  if(sourceSetContainer != null) {
+    if(isTest) {
+      project.tasks.withType(Test).configureEach {
+        pathSet.addAll(classpath.findAll { it.exists() })
+      }
 
-            project.subprojects.each { sub ->
-                sub.tasks.withType(Test).configureEach {
-                    pathSet.addAll(classpath.findAll { it.exists() })
-                }
-            }
-
-            targetSrc = sourceSetContainer.findByName("main")
-            compile = project.configurations.findByName("compileClasspath")
-            runtime = project.configurations.findByName("runtimeClasspath")
-        } else {
-            project.tasks.withType(JavaExec).configureEach {
-                pathSet.addAll(classpath.findAll { it.exists() })
-            }
-
-            project.subprojects.each { sub ->
-                sub.tasks.withType(JavaExec).configureEach {
-                    pathSet.addAll(classpath.findAll { it.exists() })
-                }
-            }
-
-            targetSrc = sourceSetContainer.findByName("test")
-            compile = project.configurations.findByName("testCompileClasspath")
-            runtime = project.configurations.findByName("testRuntimeClasspath")
+      project.subprojects.each { sub ->
+        sub.tasks.withType(Test).configureEach {
+          pathSet.addAll(classpath.findAll { it.exists() })
         }
-    }
+      }
 
-    if(pathSet.isEmpty() && targetSrc != null) {
-        List<String> classesPaths = targetSrc.output.getClassesDirs().collect { it.getPath() }
-        this.logger.info(':jshell could not find the classpath, adding ' +
-                                'the following paths from project sourceSets: {}', classesPaths)
+      targetSrc = sourceSetContainer.findByName("main")
+      compile = project.configurations.findByName("compileClasspath")
+      runtime = project.configurations.findByName("runtimeClasspath")
+    } else {
+      project.tasks.withType(JavaExec).configureEach {
+        pathSet.addAll(classpath.findAll { it.exists() })
+      }
 
-        pathSet.addAll(classesPaths)
-
-        if(compile != null && runtime != null) {
-            List<String> depsPaths = compile.collect { it.getPath() }
-            depsPaths.addAll(runtime.collect { it.getPath() })
-            this.logger.info(":jshell could not find the dependencies' classpath, adding " +
-                                    'the following paths from project configurations: {}', depsPaths)
-
-            pathSet.addAll(depsPaths)
+      project.subprojects.each { sub ->
+        sub.tasks.withType(JavaExec).configureEach {
+          pathSet.addAll(classpath.findAll { it.exists() })
         }
-    }
+      }
 
-    // Exclude non-directory / non-jar files that jshell doesn't deal with
-    pathSet = pathSet.findAll { new File(it.toString()).isDirectory() || it.toString().endsWith('.jar') }
-    
-    return pathSet
+      targetSrc = sourceSetContainer.findByName("test")
+      compile = project.configurations.findByName("testCompileClasspath")
+      runtime = project.configurations.findByName("testRuntimeClasspath")
+    }
+  }
+
+  if(pathSet.isEmpty() && targetSrc != null) {
+    List<String> classesPaths = targetSrc.output.getClassesDirs().collect { it.getPath() }
+    this.logger.info(':jshell could not find the classpath, adding ' +
+                'the following paths from project sourceSets: {}', classesPaths)
+
+    pathSet.addAll(classesPaths)
+
+    if(compile != null && runtime != null) {
+      List<String> depsPaths = compile.collect { it.getPath() }
+      depsPaths.addAll(runtime.collect { it.getPath() })
+      this.logger.info(":jshell could not find the dependencies' classpath, adding " +
+                  'the following paths from project configurations: {}', depsPaths)
+
+      pathSet.addAll(depsPaths)
+    }
+  }
+
+  // Exclude non-directory / non-jar files that jshell doesn't deal with
+  pathSet = pathSet.findAll { new File(it.toString()).isDirectory() || it.toString().endsWith('.jar') }
+
+  return pathSet
 }
 
 //==========================================================================
 // Jshell スタートアップコード生成タスク
 //==========================================================================
 tasks.register("jshellCreateStatup") {
-    doFirst {
-        println("running")
+  doFirst {
+    println("running")
 
-        Path srcPath = Path.of(getProperty("src"))
-        String src = Files.readString(srcPath)
-        println(src)
+    Path srcPath = Path.of(getProperty("src"))
+    String src = Files.readString(srcPath)
+    println(src)
 
-        Pattern classPattern = Pattern.compile("class +(.+?)( +|\\{|\$)")
-        Pattern packagePattern = Pattern.compile("package +(.+?) *;")
-        Pattern importPattern = Pattern.compile("import +.+? *;")
+    Pattern classPattern = Pattern.compile("class +(.+?)( +|\\{|\$)")
+    Pattern packagePattern = Pattern.compile("package +(.+?) *;")
+    Pattern importPattern = Pattern.compile("import +.+? *;")
 
-        Matcher classMatcher = classPattern.matcher(src)
-        classMatcher.find()
-        String className = classMatcher.group(1)
+    Matcher classMatcher = classPattern.matcher(src)
+    classMatcher.find()
+    String className = classMatcher.group(1)
 
-        Matcher packageMatcher = packagePattern.matcher(src)
-        packageMatcher.find()
-        String packageName = packageMatcher.group(1)
+    Matcher packageMatcher = packagePattern.matcher(src)
+    packageMatcher.find()
+    String packageName = packageMatcher.group(1)
 
-        Matcher importMatcher = importPattern.matcher(src)
-        List<String> importList = new ArrayList<>()
-        while (importMatcher.find()) {
-            importList.add(importMatcher.group(0))
-        }
-
-        importList.add("import " + packageName + "." + className + ";")
-        print(importList)
-        
-        // layout API に対応
-        Path output = layout.buildDirectory.file("jshell/code_runner.jsh").get().asFile.toPath()
-        Files.createDirectories(output.getParent())
-
-        List<String> lines = new ArrayList<>()
-        lines.addAll(importList)
-        lines.add("/set editor \"notepad\"")
-        lines.add("/edit")
-
-        Files.write(output, lines)
+    Matcher importMatcher = importPattern.matcher(src)
+    List<String> importList = new ArrayList<>()
+    while (importMatcher.find()) {
+      importList.add(importMatcher.group(0))
     }
+
+    importList.add("import " + packageName + "." + className + ";")
+    print(importList)
+
+    // layout API に対応
+    Path output = layout.buildDirectory.file("jshell/code_runner.jsh").get().asFile.toPath()
+    Files.createDirectories(output.getParent())
+
+    List<String> lines = new ArrayList<>()
+    lines.addAll(importList)
+    lines.add("/set editor \"notepad\"")
+    lines.add("/edit")
+
+    Files.write(output, lines)
+  }
 }

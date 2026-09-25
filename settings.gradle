@@ -5,60 +5,60 @@
 
 //プラグインの依存関係を解決するリポジトリ
 pluginManagement {
-    
-    //Architectury環境を使用する場合に有効化する
-    //apply([
-    //    from: "build-logic/architectury_setting/part/plugin_repo_settings.gradle",
-    //    to: settings
-    //])
 
-    repositories {
-        
-        google()
-        mavenCentral()
-        mavenLocal()
+  //Architectury環境を使用する場合に有効化する
+  //apply([
+  //    from: "build-logic/architectury_setting/part/plugin_repo_settings.gradle",
+  //    to: settings
+  //])
 
-        //一部が jcenter に依存
-        gradlePluginPortal()
-    }
+  repositories {
 
-    includeBuild("build-logic")
+    google()
+    mavenCentral()
+    mavenLocal()
+
+    //一部が jcenter に依存
+    gradlePluginPortal()
+  }
+
+  includeBuild("build-logic")
 }
 
 
 plugins {
-    // foojay-resolverプラグインを適用してJDKの自動ダウンロードを許可する
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+  // foojay-resolverプラグインを適用してJDKの自動ダウンロードを許可する
+  id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
 
 //全プロジェクトで使用するリポジトリを指定
 dependencyResolutionManagement {
-    repositories {
-        
-        google()
-        mavenCentral()
-        mavenLocal()
-    }
+  repositories {
 
-    //子プロジェクトでの指定を禁止
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    //Architectury環境では上の行を次の設定に置き換える
-    //repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    google()
+    mavenCentral()
+    mavenLocal()
+  }
 
-    //カタログファイルを自動検出してマッピング
-    //libs.versions.tomlはデフォルトで読み込まれるので除外。
-    versionCatalogs {
-        file("gradle").listFiles()?.sort { it.name }?.each { catalogFile ->
-            if(!catalogFile.isFile()) return;
-            if(!catalogFile.name.endsWith(".versions.toml")) return;
-            if(catalogFile.name == "libs.versions.toml") return;
-            def catalogName = catalogFile.name - ".versions.toml"
-            create(catalogName + "Libs") {
-                from(files(catalogFile))
-            }
-        }
+  //子プロジェクトでの指定を禁止
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  //Architectury環境では上の行を次の設定に置き換える
+  //repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+
+  //カタログファイルを自動検出してマッピング
+  //libs.versions.tomlはデフォルトで読み込まれるので除外。
+  versionCatalogs {
+    file("gradle").listFiles()?.sort { it.name }?.each { catalogFile ->
+      if(!catalogFile.isFile()) return;
+      if(!catalogFile.name.endsWith(".versions.toml")) return;
+      if(catalogFile.name == "libs.versions.toml") return;
+      def catalogName = catalogFile.name - ".versions.toml"
+      create(catalogName + "Libs") {
+        from(files(catalogFile))
+      }
     }
+  }
 }
 
 

@@ -6,48 +6,48 @@
 //ルートsettings.gradle の pluginManagement 内から、Settingsを対象として読み込む
 settings.pluginManagement.repositories {
 
-    maven {
-        name = "ArchitecturyPlugins"
-        content {
-            includeGroup("architectury-plugin")
-            includeGroupByRegex("dev\\.architectury(\\..*)?")
-        }
-        url = "https://maven.architectury.dev/"
+  maven {
+    name = "ArchitecturyPlugins"
+    content {
+      includeGroup("architectury-plugin")
+      includeGroupByRegex("dev\\.architectury(\\..*)?")
     }
+    url = "https://maven.architectury.dev/"
+  }
 
-    maven {
-        name = "FabricPlugins"
-        content {
-            includeGroupByRegex("net\\.fabricmc(\\..*)?")
-            includeGroup("fabric-loom")
-        }
-        url = "https://maven.fabricmc.net/"
+  maven {
+    name = "FabricPlugins"
+    content {
+      includeGroupByRegex("net\\.fabricmc(\\..*)?")
+      includeGroup("fabric-loom")
     }
+    url = "https://maven.fabricmc.net/"
+  }
 
-    maven {
-        name = "ForgePlugins"
-        content {
-            includeGroupByRegex("net\\.minecraftforge(\\..*)?")
-            includeGroup("cpw.mods")
-            includeGroupByRegex("de\\.oceanlabs(\\..*)?")
-        }
-        url = "https://maven.minecraftforge.net/"
+  maven {
+    name = "ForgePlugins"
+    content {
+      includeGroupByRegex("net\\.minecraftforge(\\..*)?")
+      includeGroup("cpw.mods")
+      includeGroupByRegex("de\\.oceanlabs(\\..*)?")
     }
+    url = "https://maven.minecraftforge.net/"
+  }
 
-    maven {
-        name = "NeoForgePlugins"
-        content {
-            includeGroupByRegex("net\\.neoforged(\\..*)?")
-        }
-        url = "https://maven.neoforged.net/releases/"
+  maven {
+    name = "NeoForgePlugins"
+    content {
+      includeGroupByRegex("net\\.neoforged(\\..*)?")
     }
+    url = "https://maven.neoforged.net/releases/"
+  }
 
-    //Loomプラグインの実行に必要なcom.mojangのライブラリを取得する
-    maven {
-        name = "MinecraftPluginLibraries"
-        url = "https://libraries.minecraft.net/"
-        content {
-            includeGroup("com.mojang")
-        }
+  //Loomプラグインの実行に必要なcom.mojangのライブラリを取得する
+  maven {
+    name = "MinecraftPluginLibraries"
+    url = "https://libraries.minecraft.net/"
+    content {
+      includeGroup("com.mojang")
     }
+  }
 }

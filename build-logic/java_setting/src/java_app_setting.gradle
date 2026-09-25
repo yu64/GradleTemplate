@@ -1,6 +1,6 @@
 plugins {
-    id("java_setting")
-    id("application")
+  id("java_setting")
+  id("application")
 }
 
 //==========================================================================
@@ -8,14 +8,14 @@ plugins {
 //==========================================================================
 
 application {
-    // 利用側のapplication.mainClassで上書き可能
-    mainClass.convention("app.Main")
+  // 利用側のapplication.mainClassで上書き可能
+  mainClass.convention("app.Main")
 }
 
 tasks.named("jar", Jar) {
-    manifest {
-        // Providerを渡し、利用側で上書きしたエントリーポイントも反映する
-        attributes "Main-Class": application.mainClass
-    }
+  manifest {
+    // Providerを渡し、利用側で上書きしたエントリーポイントも反映する
+    attributes "Main-Class": application.mainClass
+  }
 }
 

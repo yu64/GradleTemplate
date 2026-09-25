@@ -9,17 +9,17 @@ pluginManager.apply("architectury_loader_setting")
 
 def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
 architectury {
-    platformSetupLoomIde()
-    neoForge()
+  platformSetupLoomIde()
+  neoForge()
 }
 
 configurations.named("developmentNeoForge") {
-    extendsFrom(configurations.common)
+  extendsFrom(configurations.common)
 }
 
 def commonPath = providers.gradleProperty("architectury_common_project").getOrElse(":common")
 dependencies {
-    neoForge(catalog.findLibrary("neoforge").get())
-    modImplementation(catalog.findLibrary("architectury-api-neoforge").get())
-    shadowBundle(project([path: commonPath, configuration: "transformProductionNeoForge"]))
+  neoForge(catalog.findLibrary("neoforge").get())
+  modImplementation(catalog.findLibrary("architectury-api-neoforge").get())
+  shadowBundle(project([path: commonPath, configuration: "transformProductionNeoForge"]))
 }

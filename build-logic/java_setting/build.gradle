@@ -1,21 +1,21 @@
 
 plugins {
-    
-    id("groovy-gradle-plugin")
+
+  id("groovy-gradle-plugin")
 }
 
 
 dependencies {
 
-    //[Name]:[Name].gradle.plugin:[Version]
+  //[Name]:[Name].gradle.plugin:[Version]
 
 }
 
 sourceSets {
-    main {
-        groovy {
-            srcDirs("src")
-        }
+  main {
+    groovy {
+      srcDirs("src")
     }
+  }
 
 }

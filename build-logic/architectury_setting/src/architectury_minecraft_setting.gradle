@@ -1,7 +1,7 @@
 plugins {
-    id("java-library")
-    id("dev.architectury.loom")
-    id("architectury-plugin")
+  id("java-library")
+  id("dev.architectury.loom")
+  id("architectury-plugin")
 }
 
 //==========================================================================
@@ -10,37 +10,37 @@ plugins {
 
 //利用側の依存取得先。生成物・キャッシュ用の取得先はLoomが登録する。
 repositories {
-    mavenCentral()
+  mavenCentral()
 
-    maven {
-        name = "Architectury"
-        url = "https://maven.architectury.dev/"
-    }
+  maven {
+    name = "Architectury"
+    url = "https://maven.architectury.dev/"
+  }
 
-    maven {
-        name = "Fabric"
-        url = "https://maven.fabricmc.net/"
-    }
+  maven {
+    name = "Fabric"
+    url = "https://maven.fabricmc.net/"
+  }
 
-    maven {
-        name = "Quilt"
-        url = "https://maven.quiltmc.org/repository/release/"
-    }
+  maven {
+    name = "Quilt"
+    url = "https://maven.quiltmc.org/repository/release/"
+  }
 
-    maven {
-        name = "Forge"
-        url = "https://maven.minecraftforge.net/"
-    }
+  maven {
+    name = "Forge"
+    url = "https://maven.minecraftforge.net/"
+  }
 
-    maven {
-        name = "NeoForge"
-        url = "https://maven.neoforged.net/releases/"
-    }
+  maven {
+    name = "NeoForge"
+    url = "https://maven.neoforged.net/releases/"
+  }
 
-    maven {
-        name = "MinecraftLibraries"
-        url = "https://libraries.minecraft.net/"
-    }
+  maven {
+    name = "MinecraftLibraries"
+    url = "https://libraries.minecraft.net/"
+  }
 
 }
 def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
@@ -49,29 +49,29 @@ def minecraftVersion = catalog.findVersion("minecraft").get().requiredVersion
 def targetJava = catalog.findVersion("minecraft-java").get().requiredVersion.toInteger()
 
 architectury {
-    minecraft = minecraftVersion
+  minecraft = minecraftVersion
 }
 
 group = rootProject.group
 version = rootProject.version
 
 base {
-    archivesName = "${rootProject.name}-${project.name}"
+  archivesName = "${rootProject.name}-${project.name}"
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(commonCatalog.findVersion("java").get().requiredVersion.toInteger())
-    }
-    withSourcesJar()
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(commonCatalog.findVersion("java").get().requiredVersion.toInteger())
+  }
+  withSourcesJar()
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = "UTF-8"
-    options.release.set(targetJava)
+  options.encoding = "UTF-8"
+  options.release.set(targetJava)
 }
 
 dependencies {
-    minecraft("net.minecraft:minecraft:${minecraftVersion}")
-    mappings(loom.officialMojangMappings())
+  minecraft("net.minecraft:minecraft:${minecraftVersion}")
+  mappings(loom.officialMojangMappings())
 }

@@ -1,5 +1,5 @@
 plugins {
-    id("architectury_minecraft_setting")
+  id("architectury_minecraft_setting")
 }
 
 //==========================================================================
@@ -9,14 +9,14 @@ plugins {
 def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
 //対象ローダーの識別子を指定する。サブプロジェクト名の自動検出は行わない。
 def platforms = providers.gradleProperty("architectury_platforms")
-    .getOrElse("fabric,neoforge,quilt").split(",").collect { it.trim() }.findAll { !it.empty }
+  .getOrElse("fabric,neoforge,quilt").split(",").collect { it.trim() }.findAll { !it.empty }
 
 architectury {
-    common(platforms)
+  common(platforms)
 }
 
 dependencies {
-    //環境アノテーションの参照用にFabric Loaderを追加する（依存自体はLoader全体）。
-    modImplementation(catalog.findLibrary("fabric-loader").get())
-    modImplementation(catalog.findLibrary("architectury-api-common").get())
+  //環境アノテーションの参照用にFabric Loaderを追加する（依存自体はLoader全体）。
+  modImplementation(catalog.findLibrary("fabric-loader").get())
+  modImplementation(catalog.findLibrary("architectury-api-common").get())
 }

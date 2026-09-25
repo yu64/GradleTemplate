@@ -1,6 +1,6 @@
 plugins {
-    id("architectury_minecraft_setting")
-    id("com.gradleup.shadow")
+  id("architectury_minecraft_setting")
+  id("com.gradleup.shadow")
 }
 
 //==========================================================================
@@ -8,14 +8,14 @@ plugins {
 //==========================================================================
 
 configurations {
-    common {
-        canBeResolved = true
-        canBeConsumed = false
-    }
-    shadowBundle {
-        canBeResolved = true
-        canBeConsumed = false
-    }
+  common {
+    canBeResolved = true
+    canBeConsumed = false
+  }
+  shadowBundle {
+    canBeResolved = true
+    canBeConsumed = false
+  }
 }
 configurations.compileClasspath.extendsFrom(configurations.common)
 configurations.runtimeClasspath.extendsFrom(configurations.common)
@@ -23,24 +23,24 @@ configurations.runtimeClasspath.extendsFrom(configurations.common)
 //Mod本体は必須。プロジェクト名を変えた場合は参照パスを指定する。
 def commonPath = providers.gradleProperty("architectury_common_project").getOrElse(":common")
 dependencies {
-    common(project([path: commonPath, configuration: "namedElements"])) {
-        transitive = false
-    }
+  common(project([path: commonPath, configuration: "namedElements"])) {
+    transitive = false
+  }
 }
 
 //対象ローダー向けに変換したMod本体を同梱し、そのJARをremapJarへ渡す。
 tasks.named("shadowJar") {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier.set("dev-shadow")
+  configurations = [project.configurations.shadowBundle]
+  archiveClassifier.set("dev-shadow")
 }
 tasks.named("remapJar") {
-    inputFile.set(tasks.named("shadowJar").flatMap { it.archiveFile })
+  inputFile.set(tasks.named("shadowJar").flatMap { it.archiveFile })
 }
 
 tasks.named("processResources") {
-    inputs.property("version", project.version.toString())
-    inputs.property("group", project.group.toString())
-    filesMatching(["fabric.mod.json", "quilt.mod.json", "META-INF/neoforge.mods.toml"]) {
-        expand([version: project.version.toString(), group: project.group.toString()])
-    }
+  inputs.property("version", project.version.toString())
+  inputs.property("group", project.group.toString())
+  filesMatching(["fabric.mod.json", "quilt.mod.json", "META-INF/neoforge.mods.toml"]) {
+    expand([version: project.version.toString(), group: project.group.toString()])
+  }
 }

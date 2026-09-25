@@ -1,11 +1,11 @@
 plugins {
-    id "java"
-    id "io.quarkus"
+  id "java"
+  id "io.quarkus"
 }
 
 dependencies {
 
-    implementation enforcedPlatform(libs.quarkus.bom)
+  implementation enforcedPlatform(libs.quarkus.bom)
 }
 
 group = 'org.example'
@@ -13,16 +13,16 @@ version = '1.0.0-SNAPSHOT'
 
 java {
 
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(libs.versions.java.get() as Integer)
-    }
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(libs.versions.java.get() as Integer)
+  }
 }
 
 compileJava {
-    options.encoding = 'UTF-8'
-    options.compilerArgs << '-parameters'
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
 }
 
 compileTestJava {
-    options.encoding = 'UTF-8'
+  options.encoding = 'UTF-8'
 }

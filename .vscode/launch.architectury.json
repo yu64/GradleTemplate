@@ -1,59 +1,59 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Minecraft Client (:fabric)",
-            "request": "attach",
-            "preLaunchTask": "Architectury: fabric Client",
-            "hostName": "localhost",
-            "port": 5005,
-            "timeout": 300000
-        },
-        {
-            "type": "java",
-            "name": "Minecraft Server (:fabric)",
-            "request": "attach",
-            "preLaunchTask": "Architectury: fabric Server",
-            "hostName": "localhost",
-            "port": 5005,
-            "timeout": 300000
-        },
-        {
-            "type": "java",
-            "name": "Minecraft Client (:neoforge)",
-            "request": "attach",
-            "preLaunchTask": "Architectury: neoforge Client",
-            "hostName": "localhost",
-            "port": 5005,
-            "timeout": 300000
-        },
-        {
-            "type": "java",
-            "name": "Minecraft Server (:neoforge)",
-            "request": "attach",
-            "preLaunchTask": "Architectury: neoforge Server",
-            "hostName": "localhost",
-            "port": 5005,
-            "timeout": 300000
-        },
-        {
-            "type": "java",
-            "name": "Minecraft Client (:quilt)",
-            "request": "attach",
-            "preLaunchTask": "Architectury: quilt Client",
-            "hostName": "localhost",
-            "port": 5005,
-            "timeout": 300000
-        },
-        {
-            "type": "java",
-            "name": "Minecraft Server (:quilt)",
-            "request": "attach",
-            "preLaunchTask": "Architectury: quilt Server",
-            "hostName": "localhost",
-            "port": 5005,
-            "timeout": 300000
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Minecraft Client (:fabric)",
+      "request": "attach",
+      "preLaunchTask": "Architectury: fabric Client",
+      "hostName": "localhost",
+      "port": 5005,
+      "timeout": 300000
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Server (:fabric)",
+      "request": "attach",
+      "preLaunchTask": "Architectury: fabric Server",
+      "hostName": "localhost",
+      "port": 5005,
+      "timeout": 300000
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Client (:neoforge)",
+      "request": "attach",
+      "preLaunchTask": "Architectury: neoforge Client",
+      "hostName": "localhost",
+      "port": 5005,
+      "timeout": 300000
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Server (:neoforge)",
+      "request": "attach",
+      "preLaunchTask": "Architectury: neoforge Server",
+      "hostName": "localhost",
+      "port": 5005,
+      "timeout": 300000
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Client (:quilt)",
+      "request": "attach",
+      "preLaunchTask": "Architectury: quilt Client",
+      "hostName": "localhost",
+      "port": 5005,
+      "timeout": 300000
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Server (:quilt)",
+      "request": "attach",
+      "preLaunchTask": "Architectury: quilt Server",
+      "hostName": "localhost",
+      "port": 5005,
+      "timeout": 300000
+    }
+  ]
 }

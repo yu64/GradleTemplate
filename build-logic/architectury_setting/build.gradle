@@ -1,7 +1,7 @@
 
 plugins {
-    
-    id("groovy-gradle-plugin")
+
+  id("groovy-gradle-plugin")
 }
 
 
@@ -12,39 +12,39 @@ plugins {
 
 //プロジェクト側で指定するため、必要な共通リポジトリもここに用意する
 repositories {
-    mavenCentral()
-    gradlePluginPortal()
+  mavenCentral()
+  gradlePluginPortal()
 
 
-    maven {
-        name = "Architectury"
-        url = "https://maven.architectury.dev/"
-    }
+  maven {
+    name = "Architectury"
+    url = "https://maven.architectury.dev/"
+  }
 
-    maven {
-        name = "Fabric"
-        url = "https://maven.fabricmc.net/"
-    }
+  maven {
+    name = "Fabric"
+    url = "https://maven.fabricmc.net/"
+  }
 
-    maven {
-        name = "Quilt"
-        url = "https://maven.quiltmc.org/repository/release/"
-    }
+  maven {
+    name = "Quilt"
+    url = "https://maven.quiltmc.org/repository/release/"
+  }
 
-    maven {
-        name = "Forge"
-        url = "https://maven.minecraftforge.net/"
-    }
+  maven {
+    name = "Forge"
+    url = "https://maven.minecraftforge.net/"
+  }
 
-    maven {
-        name = "NeoForge"
-        url = "https://maven.neoforged.net/releases/"
-    }
+  maven {
+    name = "NeoForge"
+    url = "https://maven.neoforged.net/releases/"
+  }
 
-    maven {
-        name = "MinecraftLibraries"
-        url = "https://libraries.minecraft.net/"
-    }
+  maven {
+    name = "MinecraftLibraries"
+    url = "https://libraries.minecraft.net/"
+  }
 
 }
 
@@ -52,18 +52,18 @@ repositories {
 
 dependencies {
 
-    //プラグイン本体のバージョンもカタログで管理する
-    implementation(architecturyLibs.architectury.plugin)
-    implementation(architecturyLibs.architectury.loom)
-    implementation(architecturyLibs.shadow.plugin)
+  //プラグイン本体のバージョンもカタログで管理する
+  implementation(architecturyLibs.architectury.plugin)
+  implementation(architecturyLibs.architectury.loom)
+  implementation(architecturyLibs.shadow.plugin)
 
 }
 
 sourceSets {
-    main {
-        groovy {
-            srcDirs("src")
-        }
+  main {
+    groovy {
+      srcDirs("src")
     }
+  }
 
 }

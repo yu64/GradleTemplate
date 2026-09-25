@@ -1,5 +1,5 @@
 plugins {
-    id("architectury-plugin")
+  id("architectury-plugin")
 }
 
 //==========================================================================
@@ -8,5 +8,5 @@ plugins {
 
 def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
 architectury {
-    minecraft = catalog.findVersion("minecraft").get().requiredVersion
+  minecraft = catalog.findVersion("minecraft").get().requiredVersion
 }

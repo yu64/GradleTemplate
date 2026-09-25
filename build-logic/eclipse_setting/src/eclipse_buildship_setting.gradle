@@ -1,5 +1,5 @@
 plugins {
-    id("eclipse_setting")
+  id("eclipse_setting")
 }
 
 //==========================================================================
@@ -11,111 +11,111 @@ plugins {
  * @return モジュールプロジェクトであれば true、そうでなければ false。
  */
 boolean isModuleProject() {
-    def isModule = false
+  def isModule = false
 
-    def sourceSetContainer = extensions.findByType(SourceSetContainer)
-    if(sourceSetContainer == null) return isModule;
+  def sourceSetContainer = extensions.findByType(SourceSetContainer)
+  if(sourceSetContainer == null) return isModule;
 
-    sourceSetContainer.all { sourceSet ->
+  sourceSetContainer.all { sourceSet ->
 
-        if(sourceSet.hasProperty('java') && sourceSet.java.srcDirs) {
-            def moduleInfo = sourceSet.java.srcDirs.find { dir ->
-                new File(dir, 'module-info.java').exists()
-            }
-            if(moduleInfo) {
-                isModule = true
-                return
-            }
-        }
+    if(sourceSet.hasProperty('java') && sourceSet.java.srcDirs) {
+      def moduleInfo = sourceSet.java.srcDirs.find { dir ->
+        new File(dir, 'module-info.java').exists()
+      }
+      if(moduleInfo) {
+        isModule = true
+        return
+      }
     }
-    return isModule
+  }
+  return isModule
 }
 
 afterEvaluate {
-    def moduleProject = isModuleProject()
-    println "Project is a module project: ${moduleProject}"
+  def moduleProject = isModuleProject()
+  println "Project is a module project: ${moduleProject}"
 
-    
-    eclipse {
-        classpath {
-            file {
-                whenMerged { classpath ->
-                    if(moduleProject) {
-                        // モジュール時
-                        classpath.entries.findAll {
-                            it.properties.kind == 'lib' && it.entryAttributes['test'] != 'true'
-                        }.each {
-                            it.entryAttributes['module'] = 'true'
-                            println "marked module classpath entry: " + it.path
-                        }
 
-                        classpath.entries.findAll {
-                            it.properties.kind == 'lib' && it.entryAttributes['test'] == 'true'
-                        }.each {
-                            it.entryAttributes['module'] = 'false'
-                            println "unmarked classpath entry: " + it.path
-                        }
-
-                        classpath.entries.findAll {
-                            it.properties.path.startsWith('org.eclipse.jdt.launching.JRE_CONTAINER')
-                        }.each {
-                            it.entryAttributes['module'] = 'true'
-                            println "marked module container: " + it.path
-                        }
-                    } else {
-                        // 非モジュール時
-                        classpath.entries.removeAll { entry ->
-                            if(entry.kind == "lib") {
-                                println "delete classpath entry: " + entry.path
-                                return true
-                            }
-                            return false
-                        }
-                    }
-                }
+  eclipse {
+    classpath {
+      file {
+        whenMerged { classpath ->
+          if(moduleProject) {
+            // モジュール時
+            classpath.entries.findAll {
+              it.properties.kind == 'lib' && it.entryAttributes['test'] != 'true'
+            }.each {
+              it.entryAttributes['module'] = 'true'
+              println "marked module classpath entry: " + it.path
             }
 
-            // containers の指定も eclipse.classpath のスコープ内で行う
-            if(!moduleProject) {
-                containers "org.eclipse.buildship.core.gradleclasspathcontainer"
+            classpath.entries.findAll {
+              it.properties.kind == 'lib' && it.entryAttributes['test'] == 'true'
+            }.each {
+              it.entryAttributes['module'] = 'false'
+              println "unmarked classpath entry: " + it.path
             }
-        }
 
-        project {
-            buildCommand "org.eclipse.buildship.core.gradleprojectbuilder"
-            natures "org.eclipse.buildship.core.gradleprojectnature"
+            classpath.entries.findAll {
+              it.properties.path.startsWith('org.eclipse.jdt.launching.JRE_CONTAINER')
+            }.each {
+              it.entryAttributes['module'] = 'true'
+              println "marked module container: " + it.path
+            }
+          } else {
+            // 非モジュール時
+            classpath.entries.removeAll { entry ->
+              if(entry.kind == "lib") {
+                println "delete classpath entry: " + entry.path
+                return true
+              }
+              return false
+            }
+          }
         }
+      }
+
+      // containers の指定も eclipse.classpath のスコープ内で行う
+      if(!moduleProject) {
+        containers "org.eclipse.buildship.core.gradleclasspathcontainer"
+      }
     }
+
+    project {
+      buildCommand "org.eclipse.buildship.core.gradleprojectbuilder"
+      natures "org.eclipse.buildship.core.gradleprojectnature"
+    }
+  }
 }
 
 eclipse {
-    project {
-        buildCommand "org.eclipse.buildship.core.gradleprojectbuilder"
-        natures "org.eclipse.buildship.core.gradleprojectnature"
-    }
+  project {
+    buildCommand "org.eclipse.buildship.core.gradleprojectbuilder"
+    natures "org.eclipse.buildship.core.gradleprojectnature"
+  }
 }
 
 import java.nio.file.Files
 
 tasks.eclipse.doLast {
-    File prefs = file(".settings/org.eclipse.buildship.core.prefs")
-    if(!prefs.exists()) {
-        String path = ""
-        if(rootProject != this) {
-            def root = rootProject.projectDir.toPath()
-            def sub = projectDir.toPath()
-            path = sub.relativize(root).toString()
-        }
-        Files.createDirectories(prefs.toPath().getParent())
-        prefs.createNewFile()
-        prefs.append("""
-            connection.project.dir=$path
-            eclipse.preferences.version=1
-            """.stripIndent())
+  File prefs = file(".settings/org.eclipse.buildship.core.prefs")
+  if(!prefs.exists()) {
+    String path = ""
+    if(rootProject != this) {
+      def root = rootProject.projectDir.toPath()
+      def sub = projectDir.toPath()
+      path = sub.relativize(root).toString()
     }
+    Files.createDirectories(prefs.toPath().getParent())
+    prefs.createNewFile()
+    prefs.append("""
+      connection.project.dir=$path
+      eclipse.preferences.version=1
+      """.stripIndent())
+  }
 }
 
 tasks.cleanEclipse.doFirst {
-    File prefs = file(".settings/org.eclipse.buildship.core.prefs")
-    prefs.delete()
+  File prefs = file(".settings/org.eclipse.buildship.core.prefs")
+  prefs.delete()
 }

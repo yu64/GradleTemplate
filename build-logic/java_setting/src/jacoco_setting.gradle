@@ -1,6 +1,6 @@
 plugins {
-    id("jacoco")
-    id("java_test_setting")
+  id("jacoco")
+  id("java_test_setting")
 }
 
 //==========================================================================
@@ -11,18 +11,18 @@ plugins {
 def reportsDir = layout.buildDirectory.dir("reports/jacoco").get().asFile
 
 jacoco {
-    // 従来の reportsDirectory プロパティに正しくファイルをセット
-    reportsDirectory = reportsDir
+  // 従来の reportsDirectory プロパティに正しくファイルをセット
+  reportsDirectory = reportsDir
 }
 
 // 既存のデフォルトタスクの設定変更は tasks.named を使用
 tasks.named("jacocoTestReport", JacocoReport) {
-    // 実行終了時にブラウザで開く
-    doLast {
-        def url = new URL("file://${reportsDir}/test/html/index.html")
-        java.awt.Desktop.getDesktop().browse(url.toURI())
-        println("===== Open Report =====")
-    }
+  // 実行終了時にブラウザで開く
+  doLast {
+    def url = new URL("file://${reportsDir}/test/html/index.html")
+    java.awt.Desktop.getDesktop().browse(url.toURI())
+    println("===== Open Report =====")
+  }
 }
 
 // SourceSetContainer を取得
@@ -30,62 +30,62 @@ def sourceSetContainer = extensions.getByType(SourceSetContainer)
 
 // test と含む SourceSet ごとに自動的にレポートタスクを作成
 sourceSetContainer.all { sourceSet ->
-    // 最初のスクリプトの条件に合わせた判定
-    if(!sourceSet.name.matches("test|.*?Test|test[A-Z].*?")) {
-        if(sourceSet.name != "main" && sourceSet.name != "test") {
-            
-            println "Auto Create Task \"jacocoTestReport_${sourceSet.name}\" SourceSet:${sourceSet.name}"
-            
-            tasks.register("jacocoTestReport_${sourceSet.name}", JacocoReport) {
-                group = "verification"
-                
-                // すべてのテスト結果を読み取る
-                executionData.setFrom(fileTree(dir: layout.buildDirectory.dir("jacoco").get().asFile, include: ["*.exec"]))
+  // 最初のスクリプトの条件に合わせた判定
+  if(!sourceSet.name.matches("test|.*?Test|test[A-Z].*?")) {
+    if(sourceSet.name != "main" && sourceSet.name != "test") {
 
-                // 指定の SourceSet に限定
-                sourceSets(sourceSet)
-                
-                // 出力先指定
-                reports.html.outputLocation = file("${reportsDir}/${sourceSet.name}/html")
+      println "Auto Create Task \"jacocoTestReport_${sourceSet.name}\" SourceSet:${sourceSet.name}"
 
-                // 実行終了時にブラウザで開く
-                doLast {
-                    def url = new URL("file://${reportsDir}/${sourceSet.name}/html/index.html")
-                    java.awt.Desktop.getDesktop().browse(url.toURI())
-                    println("===== Open Report =====")
-                }
-            }
+      tasks.register("jacocoTestReport_${sourceSet.name}", JacocoReport) {
+        group = "verification"
+
+        // すべてのテスト結果を読み取る
+        executionData.setFrom(fileTree(dir: layout.buildDirectory.dir("jacoco").get().asFile, include: ["*.exec"]))
+
+        // 指定の SourceSet に限定
+        sourceSets(sourceSet)
+
+        // 出力先指定
+        reports.html.outputLocation = file("${reportsDir}/${sourceSet.name}/html")
+
+        // 実行終了時にブラウザで開く
+        doLast {
+          def url = new URL("file://${reportsDir}/${sourceSet.name}/html/index.html")
+          java.awt.Desktop.getDesktop().browse(url.toURI())
+          println("===== Open Report =====")
         }
+      }
     }
+  }
 }
 
 //==========================================================
 // Main のみに限定したレポートタスクの登録
 //==========================================================
 tasks.register("jacocoTestReportMainOnly", JacocoReport) {
-    group = "verification"
+  group = "verification"
 
-    // すべてのテスト結果を読み取る
-    executionData.setFrom(fileTree(dir: layout.buildDirectory.dir("jacoco").get().asFile, include: ["*.exec"]))
+  // すべてのテスト結果を読み取る
+  executionData.setFrom(fileTree(dir: layout.buildDirectory.dir("jacoco").get().asFile, include: ["*.exec"]))
 
-    // sourceSets.main を取得
-    def mainSourceSet = sourceSetContainer.getByName("main")
-    sourceSets(mainSourceSet)
-    
-    // 出力先指定
-    reports.html.outputLocation = file("${reportsDir}/mainOnly/html")
+  // sourceSets.main を取得
+  def mainSourceSet = sourceSetContainer.getByName("main")
+  sourceSets(mainSourceSet)
 
-    // 実行終了時にブラウザで開く
-    doLast {
-        def url = new URL("file://${reportsDir}/mainOnly/html/index.html")
-        java.awt.Desktop.getDesktop().browse(url.toURI())
-        println("===== Open Report =====")
+  // 出力先指定
+  reports.html.outputLocation = file("${reportsDir}/mainOnly/html")
+
+  // 実行終了時にブラウザで開く
+  doLast {
+    def url = new URL("file://${reportsDir}/mainOnly/html/index.html")
+    java.awt.Desktop.getDesktop().browse(url.toURI())
+    println("===== Open Report =====")
+  }
+
+  // 除外を設定
+  classDirectories.setFrom(project.provider {
+    mainSourceSet.output.classesDirs.collect { dir ->
+      fileTree(dir: dir, exclude: ["sample/**"])
     }
-
-    // 除外を設定
-    classDirectories.setFrom(project.provider {
-        mainSourceSet.output.classesDirs.collect { dir ->
-            fileTree(dir: dir, exclude: ["sample/**"])
-        }
-    })
+  })
 }

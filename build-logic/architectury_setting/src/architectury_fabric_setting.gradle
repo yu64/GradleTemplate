@@ -9,18 +9,18 @@ pluginManager.apply("architectury_loader_setting")
 
 def catalog = extensions.getByType(VersionCatalogsExtension).named("architecturyLibs")
 architectury {
-    platformSetupLoomIde()
-    fabric()
+  platformSetupLoomIde()
+  fabric()
 }
 
 configurations.named("developmentFabric") {
-    extendsFrom(configurations.common)
+  extendsFrom(configurations.common)
 }
 
 def commonPath = providers.gradleProperty("architectury_common_project").getOrElse(":common")
 dependencies {
-    modImplementation(catalog.findLibrary("fabric-loader").get())
-    modImplementation(catalog.findLibrary("fabric-api").get())
-    modImplementation(catalog.findLibrary("architectury-api-fabric").get())
-    shadowBundle(project([path: commonPath, configuration: "transformProductionFabric"]))
+  modImplementation(catalog.findLibrary("fabric-loader").get())
+  modImplementation(catalog.findLibrary("fabric-api").get())
+  modImplementation(catalog.findLibrary("architectury-api-fabric").get())
+  shadowBundle(project([path: commonPath, configuration: "transformProductionFabric"]))
 }

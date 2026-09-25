@@ -1,5 +1,5 @@
 plugins {
-    id("java_setting")
+  id("java_setting")
 }
 
 //==========================================================================
@@ -7,24 +7,24 @@ plugins {
 //==========================================================================
 
 dependencies {
-    // @AutoServiceによるプロセッサのサービス登録
-    compileOnly libs.auto.service.annotations
-    annotationProcessor libs.auto.service.processor
+  // @AutoServiceによるプロセッサのサービス登録
+  compileOnly libs.auto.service.annotations
+  annotationProcessor libs.auto.service.processor
 
-    // コンパイル結果・生成コードを検証するテスト環境
-    testImplementation libs.compile.testing
-    testImplementation platform(libs.junit.bom)
-    testImplementation libs.junit.jupiter
-    testRuntimeOnly libs.junit.platform.launcher
+  // コンパイル結果・生成コードを検証するテスト環境
+  testImplementation libs.compile.testing
+  testImplementation platform(libs.junit.bom)
+  testImplementation libs.junit.jupiter
+  testRuntimeOnly libs.junit.platform.launcher
 }
 
 tasks.named("test") {
-    useJUnitPlatform()
+  useJUnitPlatform()
 
-    // compile-testing 0.21.0の生成ソース比較が使用するjavac内部API
-    jvmArgs(
-        '--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED',
-        '--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED',
-        '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED'
-    )
+  // compile-testing 0.21.0の生成ソース比較が使用するjavac内部API
+  jvmArgs(
+    '--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED',
+    '--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED',
+    '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED'
+  )
 }

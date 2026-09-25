@@ -1,44 +1,47 @@
 {
-    "terminal.integrated.env.windows": {
-        "PSExecutionPolicyPreference": "RemoteSigned"
-    },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "terminal.integrated.env.windows": {
+    "PSExecutionPolicyPreference": "RemoteSigned"
+  },
 
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "args": ["-NoExit", "-Command", "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8"]
-        }
-    },
-    
-    "files.exclude": {
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "args": ["-NoExit", "-Command", "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8"]
+    }
+  },
 
-        //基本
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true,
+  "files.exclude": {
 
-        //Git
-        "**/.gitattributes": true,
+    //基本
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
 
-        //Gradle
-        "**/build": true,
-        "**/.gradle": true,
-        "**/gradle": false,
-        "**/gradle/wrapper": true,
-        "**/gradlew": true,
-        "**/gradlew.bat": true,
+    //Git
+    "**/.gitattributes": true,
 
-        //Eclipse
-        "**/bin": true,
-        "**/.settings": true,
-        "**/.project": true,
-        "**/.classpath": true,
-        "**/.factorypath": true,
-    },
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.debug.settings.onBuildFailureProceed": true,
+    //Gradle
+    "**/build": true,
+    "**/.gradle": true,
+    "**/gradle": false,
+    "**/gradle/wrapper": true,
+    "**/gradlew": true,
+    "**/gradlew.bat": true,
+
+    //Eclipse
+    "**/bin": true,
+    "**/.settings": true,
+    "**/.project": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+  },
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.debug.settings.onBuildFailureProceed": true,
 }

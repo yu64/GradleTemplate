@@ -1,25 +1,25 @@
 
 plugins {
 
-    id("java_app_setting")
-    id("java_test_setting")
+  id("java_app_setting")
+  id("java_test_setting")
 
-    id("eclipse_setting")
-    id("eclipse_buildship_setting")
-    id("eclipse_annotation_setting")
+  id("eclipse_setting")
+  id("eclipse_buildship_setting")
+  id("eclipse_annotation_setting")
 }
 
 
 dependencies {
 
-    
-    //implementation fileTree(dir: "lib", include: ["*"])
-    //implementation "group:name:version"
 
-    // Java Annotation Processor Template
-    // - annotation subproject: java_setting
-    // - processor subproject: java_apt_setting
-    //compileOnly project(':<annotation subproject>')
-    //annotationProcessor project(':<processor subproject>')
+  //implementation fileTree(dir: "lib", include: ["*"])
+  //implementation "group:name:version"
+
+  // Java Annotation Processor Template
+  // - annotation subproject: java_setting
+  // - processor subproject: java_apt_setting
+  //compileOnly project(':<annotation subproject>')
+  //annotationProcessor project(':<processor subproject>')
 
 }
